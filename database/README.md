@@ -70,6 +70,7 @@
 
 ## 创建数据库
 1. 推荐使用navicat手动创建
+
 ![](create-database-by-navicat.png)
 
 1. 使用命令行代码创建
