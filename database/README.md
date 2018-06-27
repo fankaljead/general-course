@@ -9,7 +9,7 @@
 2. 文章(article)
 - id				文章的ID
 - title     		文章的标题
-- author			文章的作者
+- employeeId		文章的作者的ID，对应一个人员
 - columnId			栏目id
 - content			文章的内容
 - createTime		创建日期
