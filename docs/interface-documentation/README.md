@@ -3,6 +3,7 @@
 ## 后台登录 ##
 
 1. /login 登录方法
+
   **前台参数:**
     - account
     - password
@@ -20,7 +21,8 @@
 
 ## 后台管理 ##
 
- 1. getModule 获取模块 
+ 1. getModule 获取模块
+ 
     **前台参数:**
     - 无
 
