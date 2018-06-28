@@ -208,3 +208,124 @@
     **后台返回int**
     - result: 成功1，失败0
 
+#### 栏目管理 ####
+
+1. updateColumn 更新栏目
+
+    **前台参数**
+    - columnId: 栏目id
+    - parentId: 父栏目id
+    - columnName: 栏目名称
+
+    **后台返回int**
+    - result: 成功1，失败0
+
+
+### 系统设置 ###
+
+#### 模块管理 ###
+
+1. updateModule 更新模块
+
+    **前台参数**
+    - moduleId: 模块id
+    - moduleName: 模块名字
+    - status: 是否被禁用(0:禁用 1:启用)
+    - parentModuleId: 父模块id
+
+    **后台返回int**
+    - result: 成功1，失败0
+
+#### 角色分配 ####
+
+1. assignRole 分配角色(一个用户只能分配一个角色)
+
+    **前台参数**
+    - employeeId: 被分配角色人员id
+    - roleId: 分配的角色id
+
+    **后台返回int**
+    - result: 成功1，失败0
+
+
+#### 人员管理 ####
+
+1. addEmployee 新增用户
+
+    **前台参数**
+    - employeeName: 用户名字
+    - sex: 用户性别
+    - password: 密码
+
+    **后台返回int**
+    - result: 成功1，失败0
+
+2. deleteEmployees 删除用户
+
+    **前台参数**
+    - employeeIds: 被删除用户的id(一个数组)
+
+    **后台返回int**
+    - result: 成功1，失败0
+
+3. getEmployees 获取人员
+
+    **前台参数**
+    - roleId: (0 只有角色id为0的才是没有被分配角色的， 可选)
+    - pageIndex: 当前页 (可选)
+    - pageSize: 页面大小 (可选)
+    - condition: 查询条件 (可选)
+
+    **后台返回JSON数组**
+    - employeeId: 人员id
+    - employeeName: 人员名称
+    - sex: 人员性别
+    - account: 人员的账号
+
+#### 角色管理 ####
+
+1. addRole 新增角色
+
+    **前台参数**
+    - roleName: 角色名字
+    - createTime: 创建时间
+    - description: 角色描述
+    - ownModuleIds: 角色拥有的模块id(一个数组)
+
+    **后台返回int**
+    - result: 成功1，失败0
+
+2. getRoles 获取角色
+
+    **前台参数**
+    - 无
+
+    **后台返回JSON数组**
+    - roleId: 角色id
+    - roleName: 角色名称
+    - createTime: 角色被创建时间
+    - description: 角色的描述
+
+1. updateRole 更新角色
+
+    **前台参数**
+    - roleId: 角色id
+    - roleName: 角色名字
+    - createTime: 创建时间
+    - description: 角色描述
+    - ownModuleIds: 角色拥有的模块id(一个数组)
+
+    **后台返回int**
+    - result: 成功1，失败0
+
+1. deleteRoles 删除角色
+
+    **前台参数**
+    - roleIds: 被删除角色的id
+
+    **后台返回int**
+    - result: 成功1，失败0
+
+#### 首页信息设置 ####
+
+暂未开放
