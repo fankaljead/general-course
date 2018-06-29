@@ -26,7 +26,6 @@ public class EmployeeDao {
         // 判断是否有返回值
         if (resultSet.next()) {
             // 返回密码
-            System.out.println("password password");
             String password = resultSet.getString("password");
             if (password == "" || password.equals("") || password == null) {
                 return null;

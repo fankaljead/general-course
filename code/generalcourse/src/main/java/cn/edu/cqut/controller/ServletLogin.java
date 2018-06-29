@@ -1,6 +1,7 @@
 package cn.edu.cqut.controller;
 
 import cn.edu.cqut.service.employee.EmployeeService;
+import cn.edu.cqut.service.employee.IEmployeeService;
 import cn.edu.cqut.util.Result;
 
 import javax.servlet.ServletException;
@@ -13,9 +14,13 @@ import java.io.PrintWriter;
 
 @WebServlet(name = "ServletLogin", urlPatterns = {"/login"})
 public class ServletLogin extends HttpServlet {
-    EmployeeService service = new EmployeeService();
+    IEmployeeService service = new EmployeeService();
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.setCharacterEncoding("UTF-8");
+        //解决乱码
+        response.setContentType("text/html;charset=utf-8");
+
         Integer account = Integer.parseInt(request.getParameter("account"));// 获取用户登录账号
         String password = request.getParameter("password");// 获取用户登录密码
 

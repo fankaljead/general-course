@@ -1,5 +1,8 @@
 package cn.edu.cqut.pojo;
 
+import cn.edu.cqut.util.Column;
+import cn.edu.cqut.util.Table;
+
 /**
  * @author 周翔辉
  * @create: 2018年06月29日
@@ -8,10 +11,16 @@ package cn.edu.cqut.pojo;
  * @email: 728678732@qq.com
  * @description: 权限
  **/
-public class Permission {
+@Table(name = "permission", caption = "permission")
+public class Permission extends Entity {
 
+    @Column(type = "int", isId = true, name = "id", caption = "permissionId")
     private Integer id;// 权限id
+
+    @Column(type = "int", caption = "roleId", name = "roleId")
     private Integer roleId;// 角色id
+
+    @Column(type = "int", name = "moduleId", caption = "moduleId")
     private Integer moduleId;// 模块id
 
     public Permission() {

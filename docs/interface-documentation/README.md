@@ -2,7 +2,7 @@
 
 ## 前台页面 ##
 
-1. getColunms 获取栏目信息
+1. getColumns 获取栏目信息
 
     **前台参数**
     - level: （0表示父栏目，1表示子栏目，一共两层目录）
@@ -42,9 +42,15 @@
     **前台参数**
     - resourceId: 资源id
 
-    **后台返回JSON数组**
+    **后台返回JSON字符串**
     - content: 资源内容
     - path: 资源路径
+    - title: 资源标题
+    - createTime: 创建时间
+    - whetherTop: 是否置顶
+    - status: 资源状态
+    - columnId: 栏目id
+    - columnName: 栏目名称
 
 2. search 全站搜索
 
@@ -181,6 +187,15 @@
     - content: 资源内容
     - createTime: 创建时间
     - whetherTop: 是否置顶
+
+    **后台返回int**
+    - result: 成功1，失败0
+
+1. addFile 上传文件
+
+    **前台参数**
+    - fileName: 文件名
+    - file: 文件资源
 
     **后台返回int**
     - result: 成功1，失败0
@@ -329,3 +344,8 @@
 #### 首页信息设置 ####
 
 暂未开放
+
+
+## 注意 ##
+
+### 上传的时间格式都为 （2018-06-29 19:23:42） 这个类型 ###

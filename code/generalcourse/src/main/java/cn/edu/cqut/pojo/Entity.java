@@ -1,5 +1,7 @@
 package cn.edu.cqut.pojo;
 
+import cn.edu.cqut.util.Table;
+
 /**
  * @author 周翔辉
  * @create: 2018年06月29日
@@ -10,5 +12,6 @@ package cn.edu.cqut.pojo;
  **/
 
 
+@Table
 public class Entity {
 }
