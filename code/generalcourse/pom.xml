@@ -8,5 +8,33 @@
     <artifactId>general-course</artifactId>
     <version>1.0-SNAPSHOT</version>
 
+    <!--项目所依赖的一些jar包-->
+    <dependencies>
+
+        <!-- servlet环境 -->
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+            <version>4.0.1</version>
+        </dependency>
+
+        <!-- mysql 连接工具 -->
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>8.0.11</version>
+            <!--<scope>provided</scope>-->
+        </dependency>
+
+        <!-- fast-json 便于java bean对象与json之间的转换 -->
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+            <version>1.2.47</version>
+            <!--<scope>runtime</scope>-->
+        </dependency>
+
+    </dependencies>
+
 
 </project>
