@@ -59,4 +59,5 @@ public class Role extends Entity {
     public void setDescription(String description) {
         this.description = description;
     }
+
 }

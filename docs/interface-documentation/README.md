@@ -341,6 +341,17 @@
     **后台返回int**
     - result: 成功1，失败0
 
+2. getRoleByAccount 获取登录的单个角色信息
+
+    **前台参数**
+    - 无
+
+    **后台返回JSON**
+    - roleId: 角色id
+    - roleName: 角色名称
+    - createTime: 角色被创建时间
+    - description: 角色的描述
+
 #### 首页信息设置 ####
 
 暂未开放
