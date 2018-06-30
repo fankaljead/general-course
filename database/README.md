@@ -67,6 +67,7 @@
 - id				教育资源ID
 - articleId			与文章管理相关联
 - path   			存放的路径
+- name              文件名称
 
 ## 创建数据库
 1. 推荐使用navicat手动创建
