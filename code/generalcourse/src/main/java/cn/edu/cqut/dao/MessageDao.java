@@ -62,4 +62,12 @@ public class MessageDao {
 
         return sql.toString();
     }
+
+    public String replyMessage(Integer employeeId, String content, String replyTime, Integer status) {
+        StringBuffer sql = new StringBuffer();
+
+        sql.append("update ");
+
+        return sql.toString();
+    }
 }

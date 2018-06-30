@@ -1,5 +1,7 @@
 package cn.edu.cqut.service.employee;
 
+import cn.edu.cqut.pojo.Employee;
+
 /**
  * @author 周翔辉
  * @create: 2018年06月29日
@@ -16,4 +18,11 @@ public interface IEmployeeService {
      * @return 1 成功 0 密码错误 -1 没有这个账号
      */
     public Integer login(Integer account, String password);
+
+    /**
+     * 添加用户
+     * @param employee
+     * @return  Result.SUCCESS 成功 Result.FAILED 失败
+     */
+    public Integer addEmployee(Employee employee);
 }

@@ -78,7 +78,7 @@
     **后台返回int**
     - result: 留言成功1，留言失败0
 
-4. getMessages 获取留言(**后台管理也可以使用**)
+4. getMessages 获取留言(**后台管理也可以使用**) 已完成
 
     **前台参数**
     - pageIndex: 当前页码
@@ -166,17 +166,40 @@
 
 #### 留言管理 ####
 
-1. deleteMessages 删除留言
+1. deleteMessages 删除留言 已完成
 
     **前台参数**
     - messageIds: 需要删除留言的id
+	~~~
+	格式为:
+	
+	messageIds:
+		[
+			{
+				messageId: 0,
+			}
+			{
+				messageId: 1,
+			}
+			...
+		]
+	
+	~~~
 
     **后台返回int**
     - result: 成功1，失败0
 
-1. replyMessage 回复留言
+1. replyMessage 回复留言  已完成
 
     **前台参数**
+	-- messageId: 留言id
+	- reply: 回答内容
+	- replyTime: 回答时间
+	- status: 留言状态
+	
+	**后台返回int**
+    - result: 成功1，失败0
+	
 
 #### 文章管理和审核文章 ###
 
@@ -219,15 +242,22 @@
         - status: 文章状态(0:未审核 1: 审核通过 2:审核不通过)
         - resourceId: 资源id
 
-        **2 删除**
-        - resourceIds: 所选要删除资源的id
+       
 
     **后台返回int**
     - result: 成功1，失败0
 
+1. deleteResources 删除资源 已完成
+
+	 **前台参数**
+     - resourceIds: 所选要删除资源的id
+	 
+	 **后台返回int**
+	 - result: 成功1，失败0
+	
 #### 栏目管理 ####
 
-1. updateColumn 更新栏目
+1. updateColumn 更新栏目 已完成
 
     **前台参数**
     - columnId: 栏目id
@@ -242,7 +272,7 @@
 
 #### 模块管理 ###
 
-1. updateModule 更新模块
+1. updateModule 更新模块  已完成
 
     **前台参数**
     - moduleId: 模块id
@@ -255,7 +285,7 @@
 
 #### 角色分配 ####
 
-1. assignRole 分配角色(一个用户只能分配一个角色)
+1. assignRole 分配角色(一个用户只能分配一个角色) 已完成
 
     **前台参数**
     - employeeId: 被分配角色人员id
@@ -267,7 +297,7 @@
 
 #### 人员管理 ####
 
-1. addEmployee 新增用户
+1. addEmployee 新增用户 已完成
 
     **前台参数**
     - employeeName: 用户名字
@@ -362,3 +392,4 @@
 ## 注意 ##
 
 ### 上传的时间格式都为 （2018-06-29 19:23:42） 这个类型 ###
+### 执行lib/js/CurrentTime.js 中的 Current()方法即可 ###

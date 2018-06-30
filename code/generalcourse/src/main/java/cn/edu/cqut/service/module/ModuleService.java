@@ -1,6 +1,8 @@
 package cn.edu.cqut.service.module;
 
+import cn.edu.cqut.dao.BaseDao;
 import cn.edu.cqut.dao.ModuleDao;
+import cn.edu.cqut.pojo.SubModule;
 import cn.edu.cqut.util.DBUtil;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
@@ -25,5 +27,14 @@ public class ModuleService implements IModuleService{
         JSONArray jsonArray = dao.getModule(account);
 
         return jsonArray;
+    }
+
+    /**
+     * 更新子模块
+     * @param subModule
+     * @return Result.SUCCESS 成功 Result.FAILED 失败
+     */
+    public Integer updateModule(SubModule subModule) {
+        return BaseDao.update(subModule);
     }
 }

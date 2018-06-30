@@ -103,4 +103,55 @@ public class MessageService implements IMessageService{
 
         return array;
     }
+
+
+    public Integer deleteMessages(JSONArray array) {
+        if (array == null) {
+            return Result.FAILED;
+        }
+        for (int i = 0; i < array.size(); i++) {
+            System.out.println("id: " + JSONObject.parseObject(array.getString(i)).get("messageId"));
+            try {
+                EntityDao.deleteByID((Integer) JSONObject.parseObject(array.getString(i)).get("messageId"), Message.class);
+            } catch (SQLException e) {
+                e.printStackTrace();
+                return Result.FAILED;
+            } catch (IOException e) {
+                e.printStackTrace();
+                return Result.FAILED;
+            } catch (ClassNotFoundException e) {
+                e.printStackTrace();
+                return Result.FAILED;
+            }
+        }
+        return Result.SUCCESS;
+    }
+
+    /**
+     * 回答留言
+     * @param message 留言对象
+     * @return
+     */
+    public Integer replyMessage(Message message) {
+        try {
+            EntityDao.update(message);
+            return Result.SUCCESS;
+        } catch (NoSuchMethodException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        return Result.FAILED;
+    }
+
+
 }

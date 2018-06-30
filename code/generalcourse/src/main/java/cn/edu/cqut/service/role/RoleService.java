@@ -1,6 +1,8 @@
 package cn.edu.cqut.service.role;
 
+import cn.edu.cqut.dao.BaseDao;
 import cn.edu.cqut.dao.RoleDao;
+import cn.edu.cqut.pojo.Employee;
 import cn.edu.cqut.pojo.Role;
 import cn.edu.cqut.util.DBUtil;
 
@@ -55,5 +57,9 @@ public class RoleService implements IRoleService{
         }
 
         return role;
+    }
+
+    public Integer assignRole(Employee employee) {
+        return BaseDao.update(employee);
     }
 }

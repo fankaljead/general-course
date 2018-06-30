@@ -1,7 +1,15 @@
 package cn.edu.cqut.service.colunm;
 
+import cn.edu.cqut.dao.BaseDao;
 import cn.edu.cqut.dao.ColunmDao;
+import cn.edu.cqut.dao.EntityDao;
+import cn.edu.cqut.pojo.Colunm;
+import cn.edu.cqut.util.Result;
 import com.alibaba.fastjson.JSONArray;
+
+import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
+import java.sql.SQLException;
 
 /**
  * @author 周翔辉
@@ -26,5 +34,14 @@ public class ColunmService implements IColunmService{
         JSONArray objects = dao.getColunm(level, colunmId);
 
         return objects;
+    }
+
+    /**
+     * 更新栏目
+     * @param colunm
+     * @return
+     */
+    public Integer updateColunm(Colunm colunm) {
+        return BaseDao.update(colunm);
     }
 }

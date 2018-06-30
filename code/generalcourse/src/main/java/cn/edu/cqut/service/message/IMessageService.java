@@ -27,4 +27,18 @@ public interface IMessageService {
      * @return
      */
     public JSONArray getMessages(Integer pageIndex, Integer pageSize, Integer status);
+
+    /**
+     * 删除留言
+     * @param array
+     * @return
+     */
+    public Integer deleteMessages(JSONArray array);
+
+    /**
+     * 回复留言
+     * @param message 留言对象
+     * @return Result.SUCCESS 成功 Result.FAILED 失败
+     */
+    public Integer replyMessage(Message message);
 }

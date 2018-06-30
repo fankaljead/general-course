@@ -1,5 +1,6 @@
 package cn.edu.cqut.service.role;
 
+import cn.edu.cqut.pojo.Employee;
 import cn.edu.cqut.pojo.Role;
 
 import java.util.List;
@@ -25,4 +26,11 @@ public interface IRoleService {
      * @return
      */
     public Role getRoleByAccount(Integer account);
+
+    /**
+     * 给用户分配角色
+     * @param employee
+     * @return
+     */
+    public Integer assignRole(Employee employee);
 }

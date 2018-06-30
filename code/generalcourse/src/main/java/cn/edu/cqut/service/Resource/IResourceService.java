@@ -47,4 +47,12 @@ public interface IResourceService {
      * @return
      */
     public JSONArray search(String keyWords);
+
+
+    /**
+     * 更新文章
+     * @param article
+     * @return
+     */
+    public Integer updateResource(Article article);
 }

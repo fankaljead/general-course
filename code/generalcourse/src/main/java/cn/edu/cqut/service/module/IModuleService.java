@@ -1,5 +1,7 @@
 package cn.edu.cqut.service.module;
 
+import cn.edu.cqut.pojo.Module;
+import cn.edu.cqut.pojo.SubModule;
 import com.alibaba.fastjson.JSONArray;
 
 /**
@@ -17,4 +19,12 @@ public interface IModuleService {
      * @return
      */
     public JSONArray getModule(Integer account);
+
+
+    /**
+     * 更新子模块
+     * @param subModule
+     * @return Result.SUCCESS 成功 Result.FAILED 失败
+     */
+    public Integer updateModule(SubModule subModule);
 }

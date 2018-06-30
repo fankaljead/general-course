@@ -35,4 +35,12 @@ public class EmployeeDao {
 //        System.out.println("password" + resultSet.getString("password"));
         return null;
     }
+
+    public String setAccount() {
+        StringBuffer sql = new StringBuffer();
+
+        sql.append("update employee set account=(select max(id) from employee) where id=(select max(id) from employee)");
+
+        return sql.toString();
+    }
 }

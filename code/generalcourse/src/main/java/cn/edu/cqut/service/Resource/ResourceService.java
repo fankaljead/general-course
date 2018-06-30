@@ -167,4 +167,32 @@ public class ResourceService implements IResourceService{
 
         return array;
     }
+
+    /**
+     * 更新资源
+     * @param article
+     * @return
+     */
+    public Integer updateResource(Article article) {
+
+        try {
+            EntityDao.update(article);
+
+            return Result.SUCCESS;
+        } catch (NoSuchMethodException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        return Result.FAILED;
+    }
 }
