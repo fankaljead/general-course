@@ -95,4 +95,76 @@ public class ResourceService implements IResourceService{
 
         return array;
     }
+
+    /**
+     *
+     * @param resourceId 资源 article id
+     * @return 获取资源详情（既可以获取文章也可以获取文件）
+     */
+    public JSONObject getResourceContent(Integer resourceId) {
+
+        JSONObject object = new JSONObject();
+
+        String sql = dao.getResourceContent(resourceId);
+
+        try {
+            ResultSet resultSet = DBUtil.query(sql);
+
+            if (resultSet.next()) {
+                object.put("resourceId", resultSet.getInt("article.id"));
+                object.put("content", resultSet.getString("content"));
+                object.put("path", resultSet.getString("path"));
+                object.put("title", resultSet.getString("title"));
+                object.put("createTime", resultSet.getString("createTime"));
+                object.put("whetherTop", resultSet.getInt("whetherTop"));
+                object.put("status", resultSet.getInt("status"));
+                object.put("columnId", resultSet.getInt("columnId"));
+                object.put("columnName", resultSet.getString("name"));
+
+
+                return object;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+
+
+        return object;
+    }
+
+    public JSONArray search(String keyWords) {
+        JSONArray array = new JSONArray();
+
+        String sql = dao.search(keyWords);
+
+        try {
+            ResultSet set = DBUtil.query(sql);
+
+            while (set.next()) {
+                JSONObject object = new JSONObject();
+
+                object.put("resourceId", set.getInt("article.id"));
+                object.put("title", set.getString("article.title"));
+                object.put("createTime", set.getString("article.createTime"));
+                object.put("whetherTop", set.getInt("article.whetherTop"));
+                object.put("status", set.getInt("article.status"));
+                object.put("path", set.getString("file.path"));
+                object.put("fileName", set.getString("file.name"));
+
+                array.add(object);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        return array;
+    }
 }

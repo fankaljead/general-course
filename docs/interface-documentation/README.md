@@ -2,7 +2,7 @@
 
 ## 前台页面 ##
 
-1. getColumns 获取栏目信息
+1. getColumns 获取栏目信息  已完成
 
     **前台参数**
     - level: （0表示父栏目，1表示子栏目，一共两层目录）
@@ -18,7 +18,7 @@
     - 进入首页直接请level为0的栏目
     - 点击某个栏目传level为1和点击栏目的id
 
-2. getResources 获取资源 包括文章和文件等资源(**后台管理也可以使用**)
+2. getResources 获取资源 包括文章和文件等资源(**后台管理也可以使用**) 已完成
 
     **前台参数**
     - columnId: 栏目id
@@ -37,12 +37,13 @@
     - columnId: 栏目id
     - columnName: 栏目名称
 
-1. getResourceContent 获取资源详情（既可以获取文章也可以获取文件）(**后台管理也可以使用**)
+1. getResourceContent 获取资源详情（既可以获取文章也可以获取文件）(**后台管理也可以使用**) 已完成
 
     **前台参数**
     - resourceId: 资源id
 
     **后台返回JSON字符串**
+	- resourceId: 资源id
     - content: 资源内容
     - path: 资源路径
     - title: 资源标题
@@ -51,8 +52,9 @@
     - status: 资源状态
     - columnId: 栏目id
     - columnName: 栏目名称
+	- fileName: 文件名
 
-2. search 全站搜索
+2. search 全站搜索 已完成
 
     **前台参数**
     - keyWords: 关键字
@@ -66,7 +68,7 @@
     - status: 文章状态
     - path: 资源路径
 
-3. addMessage 新增留言
+3. addMessage 新增留言 已完成
 
     **前台参数**
     - content: 留言内容
@@ -79,8 +81,8 @@
 4. getMessages 获取留言(**后台管理也可以使用**)
 
     **前台参数**
-    - page: 当前页码
-    - pageIndex: 每页多少个
+    - pageIndex: 当前页码
+    - pageSize: 每页多少个
     - status 默认为1 (1为已经回复，0为未回复，2为全选，可选)
 
     **后台返回JSON数组**
@@ -109,7 +111,7 @@
 
 ## 后台登录 ##
 
-1. login 登录方法
+1. login 登录方法 已完成
 
     **前台参数:**
     - account
@@ -131,7 +133,7 @@
 
 ### 后台管理整体页面 ###
 
- 1. getModule 获取模块
+ 1. getModule 获取模块 已完成
  
     **前台参数:**
     - 无
@@ -178,7 +180,7 @@
 
 #### 文章管理和审核文章 ###
 
-1. addResource 添加资源
+1. addResource 添加资源 已完成
 
     **前台参数**
     - title: 资源名称
@@ -341,7 +343,7 @@
     **后台返回int**
     - result: 成功1，失败0
 
-2. getRoleByAccount 获取登录的单个角色信息
+2. getRoleByAccount 获取登录的单个角色信息 已完成
 
     **前台参数**
     - 无

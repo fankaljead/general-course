@@ -57,7 +57,7 @@ public class ResourceDao {
 
         // 筛选是否进行标题搜索
         if (!(title == null || title.equals("") || title.equals("undefined"))) {
-            sql.append(" and title='" + title + "'");
+            sql.append(" and title like '%" + title + "%'");
         }
 
         // 判断是否进行时间开始搜索
@@ -80,11 +80,62 @@ public class ResourceDao {
             pageSize = ResourceDao.DEFAULT_PAGE_SIZE;
         }
 
+        // 按照时间排序，由新到旧
+        sql.append("order by article.createTime desc");
+
         // 获取的第一条记录的下标
-        Integer start = (pageIndex - 1) * pageSize + 1;
+        Integer start = (pageIndex - 1) * pageSize;
         sql.append(" limit " + start + "," + pageSize);
 
-        System.out.println("sql:" + sql);
+
+        return sql.toString();
+    }
+
+
+    /**
+     * 获取资源详情（既可以获取文章也可以获取文件）
+     * @param resourceId
+     * @return
+     */
+    public String getResourceContent(Integer resourceId) {
+        StringBuffer sql = new StringBuffer();
+
+        sql.append("select * from article left outer join colunm on (article.columnId=colunm.id), file  where article.id=file.articleId and article.id=" + resourceId);
+
+        return sql.toString();
+    }
+
+
+    /**
+     * 全站搜索
+     * @param keyWords
+     * @return
+     */
+    public String search(String keyWords) {
+        StringBuffer sql = new StringBuffer();
+
+        sql.append("select * from article " +
+                "left outer join file on(article.id=file.articleId) " +
+                "left outer join colunm on(article.columnId=colunm.id) ");
+
+        sql.append("where article.id like '%" + keyWords + "%' ");
+        sql.append("or article.id like '%" + keyWords + "%' ");
+        sql.append("or article.title like '%" + keyWords + "%' ");
+        sql.append("or article.employeeId like '%" + keyWords + "%' ");
+        sql.append("or article.columnId like '%" + keyWords + "%' ");
+        sql.append("or article.content like '%" + keyWords + "%' ");
+        sql.append("or article.createTime like '%" + keyWords + "%' ");
+        sql.append("or article.whetherTop like '%" + keyWords + "%' ");
+
+        sql.append("or file.name like '%" + keyWords + "%' ");
+        sql.append("or file.id like '%" + keyWords + "%' ");
+
+        sql.append("or colunm.id like '%" + keyWords + "%' ");
+        sql.append("or colunm.name like '%" + keyWords + "%' ");
+
+        // 按照时间排序，由新到旧
+        sql.append("order by article.createTime desc");
+
 
         return sql.toString();
     }

@@ -1,6 +1,7 @@
 package cn.edu.cqut.service.message;
 
 import cn.edu.cqut.pojo.Message;
+import com.alibaba.fastjson.JSONArray;
 
 /**
  * @author 周翔辉
@@ -17,4 +18,13 @@ public interface IMessageService {
      * @return Result.SUCCESS 成功 Result.FAILED 失败
      */
     public Integer addMessage(Message message);
+
+    /**
+     * 获取留言
+     * @param pageIndex
+     * @param pageSize
+     * @param status
+     * @return
+     */
+    public JSONArray getMessages(Integer pageIndex, Integer pageSize, Integer status);
 }

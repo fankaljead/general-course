@@ -6,9 +6,12 @@ import cn.edu.cqut.dao.MessageDao;
 import cn.edu.cqut.pojo.Message;
 import cn.edu.cqut.util.DBUtil;
 import cn.edu.cqut.util.Result;
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
 
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 /**
@@ -40,5 +43,64 @@ public class MessageService implements IMessageService{
         }
 
         return Result.FAILED;
+    }
+
+    public JSONArray getMessages(Integer pageIndex, Integer pageSize, Integer status) {
+        JSONArray array = new JSONArray();
+
+        String sql = dao.getMessages(pageIndex, pageSize, status);
+
+        try {
+            ResultSet set = DBUtil.query(sql);
+            // 全部留言 status = 2
+            if (status == Message.ALL) {
+                while (set.next()) {
+                    JSONObject object = new JSONObject();
+
+                    object.put("messageId", set.getInt("message.id"));
+                    object.put("moduleId", set.getInt("message.moduleId"));
+                    object.put("status", set.getInt("message.status"));
+                    object.put("content", set.getString("message.content"));
+                    object.put("createTime", set.getString("message.createTime"));
+                    object.put("reply", set.getString("message.reply"));
+                    object.put("replyTime", set.getString("message.replyTime"));
+
+                    array.add(object);
+                }
+            } else if (status == Message.HAVE_REPLY) { // 已经回复的留言 status = 1
+                while (set.next()) {
+                    JSONObject object = new JSONObject();
+
+                    object.put("messageId", set.getInt("message.id"));
+                    object.put("moduleId", set.getInt("message.moduleId"));
+                    object.put("content", set.getString("message.content"));
+                    object.put("createTime", set.getString("message.createTime"));
+                    object.put("reply", set.getString("message.reply"));
+                    object.put("replyTime", set.getString("message.replyTime"));
+
+                    array.add(object);
+                }
+            } else { // 未被回复的留言 status = 0
+                while (set.next()) {
+                    JSONObject object = new JSONObject();
+
+                    object.put("messageId", set.getInt("message.id"));
+                    object.put("moduleId", set.getInt("message.moduleId"));
+                    object.put("content", set.getString("message.content"));
+                    object.put("createTime", set.getString("message.createTime"));
+
+                    array.add(object);
+                }
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        return array;
     }
 }

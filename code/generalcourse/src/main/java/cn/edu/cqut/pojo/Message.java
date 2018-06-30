@@ -14,6 +14,10 @@ import cn.edu.cqut.util.Table;
 @Table(name = "message", caption = "message")
 public class Message extends Entity {
 
+    public static final Integer HAVE_REPLY = 1;
+    public static final Integer NOT_REPLY = 0;
+    public static final Integer ALL = 2;
+
     @Column(isId = true, type = "int", name = "id", caption = "messageId")
     private Integer id;// 留言id
 
