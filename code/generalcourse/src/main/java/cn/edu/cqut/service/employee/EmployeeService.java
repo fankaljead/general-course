@@ -70,9 +70,9 @@ public class EmployeeService implements IEmployeeService{
             if (BaseDao.save(employee) != Result.SUCCESS){
                 return Result.FAILED;
             } else {
-                Integer account = EntityDao.getSavedId(Employee.class);
-                DBUtil.execute(employeeDao.setAccount() + account);
-                return account;
+                Integer employeeId = EntityDao.getSavedId(Employee.class);
+                DBUtil.execute(employeeDao.setAccount(employeeId));
+                return employeeId;
             }
 
         } catch (SQLException e) {

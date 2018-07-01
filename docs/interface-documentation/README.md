@@ -216,11 +216,19 @@
     **后台返回int**
     - result: 成功1，失败0
 
-1. addFile 上传文件
+1. uploadFile 上传文件
 
     **前台参数**
     - fileName: 文件名
     - file: 文件资源
+
+    **后台返回int**
+    - result: 成功1，失败0
+	
+1. downloadFile 下载文件
+
+    **前台参数**
+    - fileId: 文件id
 
     **后台返回int**
     - result: 成功1，失败0
@@ -328,7 +336,7 @@
     **后台返回int**
     - result: 成功1，失败0
 
-3. getEmployees 获取人员
+3. getEmployees 获取人员 已完成
 
     **前台参数**
     - roleId: (0 只有角色id为0的才是没有被分配角色的， 可选)
@@ -344,18 +352,21 @@
 
 #### 角色管理 ####
 
-1. addRole 新增角色
+1. addRole 新增角色  已完成
 
     **前台参数**
     - roleName: 角色名字
     - createTime: 创建时间
     - description: 角色描述
     - ownModuleIds: 角色拥有的模块id(一个数组)
+		~~~
+		[100000, 100001 ,...]
+		~~~
 
     **后台返回int**
     - result: 成功1，失败0
 
-2. getRoles 获取角色
+2. getRoles 获取角色 已完成
 
     **前台参数**
     - 无
@@ -366,22 +377,27 @@
     - createTime: 角色被创建时间
     - description: 角色的描述
 
-1. updateRole 更新角色
+1. updateRole 更新角色 已完成
 
     **前台参数**
     - roleId: 角色id
     - roleName: 角色名字
-    - createTime: 创建时间
     - description: 角色描述
     - ownModuleIds: 角色拥有的模块id(一个数组)
+		~~~
+		[100000, 100001 ,...]
+		~~~
 
     **后台返回int**
     - result: 成功1，失败0
 
-1. deleteRoles 删除角色
+1. deleteRoles 删除角色 已完成
 
     **前台参数**
     - roleIds: 被删除角色的id
+		~~~
+		[100000, 100001 ,...]
+		~~~
 
     **后台返回int**
     - result: 成功1，失败0

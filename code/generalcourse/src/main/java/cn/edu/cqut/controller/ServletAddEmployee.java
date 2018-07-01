@@ -15,6 +15,11 @@ import java.io.PrintWriter;
 
 /**
  * 新增用户
+ * 前台参数
+ *
+ * employeeName: 用户名字
+ * sex: 用户性别
+ * password: 密码
  */
 @WebServlet(name = "ServletAddEmployee", urlPatterns = {"/addEmployee"})
 public class ServletAddEmployee extends HttpServlet {

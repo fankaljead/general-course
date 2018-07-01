@@ -33,4 +33,27 @@ public interface IRoleService {
      * @return
      */
     public Integer assignRole(Employee employee);
+
+    /**
+     * 新增角色
+     * @param role
+     * @param ownModuleIds
+     * @return
+     */
+    public Integer addRole(Role role, List<Integer> ownModuleIds);
+
+    /**
+     * 修改角色
+     * @param role
+     * @param ownModuleIds
+     * @return
+     */
+    public Integer updateRole(Role role, List<Integer> ownModuleIds);
+
+    /**
+     * 删除角色
+     * @param roleIds
+     * @return
+     */
+    public Integer deleteRoles(List<Integer> roleIds);
 }

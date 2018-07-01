@@ -40,10 +40,10 @@ public class EmployeeDao {
      * 将新增人员的 account 设成跟 id 一样的值
      * @return
      */
-    public String setAccount() {
+    public String setAccount(Integer employeeId) {
         StringBuffer sql = new StringBuffer();
 
-        sql.append("update employee set account=");
+        sql.append("update employee set account=" + employeeId + " where id=" + employeeId);
 
         return sql.toString();
     }
@@ -60,7 +60,7 @@ public class EmployeeDao {
     public String getEmployees(Integer roleId, Integer pageIndex, Integer pageSize, String condition) {
         StringBuffer sql = new StringBuffer();
 
-        sql.append("select * from employee where ");
+        sql.append("select * from employee ");
 
         // 判断roleId条件是否有and
         boolean haveAnd = false;
@@ -68,7 +68,7 @@ public class EmployeeDao {
         // 搜索条件不为空时加入like子句
         if (!(condition == null || condition.equals("") || condition.equals("undefined"))) {
             haveAnd = true;
-            sql.append(" employee.id like '%" + condition + "%' ");
+            sql.append(" where employee.id like '%" + condition + "%' ");
             sql.append(" or employee.name like '%" + condition + "%' ");
             sql.append(" or employee.sex like '%" + condition + "%' ");
             sql.append(" or employee.account like '%" + condition + "%' ");
@@ -79,6 +79,8 @@ public class EmployeeDao {
         if (!(roleId == null || roleId == 0)) {
             if (haveAnd) {
                 sql.append(" and ");
+            } else {
+                sql.append(" where ");
             }
             sql.append(" roleId=" + roleId);
         }

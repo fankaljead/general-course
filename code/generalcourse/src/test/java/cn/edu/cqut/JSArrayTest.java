@@ -23,4 +23,17 @@ public class JSArrayTest {
             System.out.println("id: " + JSONObject.parseObject(array.getString(i)).get("id"));
         }
     }
+
+    /**
+     * 测试[10000, 10001, ...]数组
+     */
+    @Test
+    public void testArray() {
+        String ids = "[100000, 100001, 100002]";
+        JSONArray array = JSONArray.parseArray(ids);
+
+        for (int i = 0; i < array.size(); i++) {
+            System.out.println("id: " + (array.getString(i)));
+        }
+    }
 }
