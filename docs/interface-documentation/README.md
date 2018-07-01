@@ -305,13 +305,26 @@
     - password: 密码
 
     **后台返回int**
-    - result: 成功1，失败0
+    - result: 成功返回账号，失败0
 
-2. deleteEmployees 删除用户
+2. deleteEmployees 删除用户 已完成
 
     **前台参数**
     - employeeIds: 被删除用户的id(一个数组)
-
+	
+	~~~
+	employeeIds:
+		[
+			{
+				employeeId: 0,
+			},
+			{
+				employeeId: 1,
+			}
+			...
+		]
+	~~~
+	
     **后台返回int**
     - result: 成功1，失败0
 

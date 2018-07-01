@@ -1,6 +1,9 @@
 package cn.edu.cqut.service.employee;
 
 import cn.edu.cqut.pojo.Employee;
+import com.alibaba.fastjson.JSONArray;
+
+import java.util.List;
 
 /**
  * @author 周翔辉
@@ -22,7 +25,25 @@ public interface IEmployeeService {
     /**
      * 添加用户
      * @param employee
-     * @return  Result.SUCCESS 成功 Result.FAILED 失败
+     * @return  成功返回账号  失败返回Result.FAILED
      */
     public Integer addEmployee(Employee employee);
+
+    /**
+     * 删除人员
+     * @param array
+     * @return
+     */
+    public Integer deleteEmployees(JSONArray array);
+
+
+    /**
+     * 获取人员
+     * @param roleId 角色id
+     * @param pageIndex
+     * @param pageSize
+     * @param condition 条件
+     * @return employee数组
+     */
+    public List<Employee> getEmployees(Integer roleId, Integer pageIndex, Integer pageSize, String condition);
 }

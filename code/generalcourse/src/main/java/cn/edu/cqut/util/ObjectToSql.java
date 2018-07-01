@@ -226,7 +226,7 @@ public class ObjectToSql {
             Column column = field.getAnnotation(Column.class);
             boolean isId = column.isId();
             if (isId) {
-                 sql.append(field.getName() + ") as id from " + clazz.getSimpleName());
+                 sql.append(field.getName() + ") as id from " + clazz.getSimpleName().toLowerCase());
                  break;
             } else {
                 continue;
