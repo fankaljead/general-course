@@ -1,8 +1,10 @@
 package cn.edu.cqut.service.Resource;
 
+import cn.edu.cqut.dao.BaseDao;
 import cn.edu.cqut.dao.EntityDao;
 import cn.edu.cqut.dao.ResourceDao;
 import cn.edu.cqut.pojo.Article;
+import cn.edu.cqut.pojo.File;
 import cn.edu.cqut.util.DBUtil;
 import cn.edu.cqut.util.Result;
 import com.alibaba.fastjson.JSONArray;
@@ -194,5 +196,33 @@ public class ResourceService implements IResourceService{
         }
 
         return Result.FAILED;
+    }
+
+    /**
+     * 上传文件
+     * @param file
+     * @return
+     */
+    public Integer uploadFile(File file) {
+        return BaseDao.save(file);
+    }
+
+    public File downloadFile(Integer fileId) {
+        try {
+            File file = (File) BaseDao.query(fileId, File.class).get(0);
+
+            return file;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        } catch (InstantiationException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 }

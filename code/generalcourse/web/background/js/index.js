@@ -16,9 +16,10 @@ $(document).ready(function () {
 function loginClick() {
    var account = document.getElementById('form-account').value;
    var password = document.getElementById('form-password').value;
+   console.log("md5 password:" , $.md5(password))
 
     $.ajax({
-        url: "/login?account=" + account + "&password=" + password,
+        url: "/login?account=" + account + "&password=" + $.md5(password),
         method: "post",
 
         success: function (data) {

@@ -216,7 +216,7 @@
     **后台返回int**
     - result: 成功1，失败0
 
-1. uploadFile 上传文件
+1. uploadFile 上传文件 已完成
 
     **前台参数**
     - fileName: 文件名
@@ -225,13 +225,13 @@
     **后台返回int**
     - result: 成功1，失败0
 	
-1. downloadFile 下载文件
+1. downloadFile 下载文件 已完成
 
     **前台参数**
     - fileId: 文件id
 
     **后台返回int**
-    - result: 成功1，失败0
+    - 无
 
 2. updateResource 更新资源
 
@@ -310,7 +310,7 @@
     **前台参数**
     - employeeName: 用户名字
     - sex: 用户性别
-    - password: 密码
+    - password: 密码 **传递密码应当使用$.md5(password)方法**
 
     **后台返回int**
     - result: 成功返回账号，失败0

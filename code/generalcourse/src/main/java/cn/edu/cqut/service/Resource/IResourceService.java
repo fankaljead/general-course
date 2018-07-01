@@ -1,6 +1,7 @@
 package cn.edu.cqut.service.Resource;
 
 import cn.edu.cqut.pojo.Article;
+import cn.edu.cqut.pojo.File;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 
@@ -55,4 +56,18 @@ public interface IResourceService {
      * @return
      */
     public Integer updateResource(Article article);
+
+    /**
+     * 上传文件
+     * @param file
+     * @return Result.SUCCESS 成功 Result.FAILED 失败
+     */
+    public Integer uploadFile(File file);
+
+    /**
+     * 下载文件
+     * @param fileId
+     * @return Result.SUCCESS 成功 Result.FAILED 失败
+     */
+    public File downloadFile(Integer fileId);
 }
