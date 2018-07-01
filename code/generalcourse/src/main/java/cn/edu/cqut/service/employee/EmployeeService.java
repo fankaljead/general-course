@@ -1,6 +1,9 @@
 package cn.edu.cqut.service.employee;
 
+import cn.edu.cqut.dao.BaseDao;
 import cn.edu.cqut.dao.EmployeeDao;
+import cn.edu.cqut.pojo.Employee;
+import cn.edu.cqut.util.DBUtil;
 import cn.edu.cqut.util.Result;
 
 import java.io.IOException;
@@ -47,5 +50,31 @@ public class EmployeeService implements IEmployeeService{
             e.printStackTrace();
             return -1;
         }
+    }
+
+    /**
+     * 新增用户
+     * @param employee
+     * @return
+     */
+    public Integer addEmployee(Employee employee) {
+
+        try {
+            if (BaseDao.save(employee) != Result.SUCCESS){
+                return Result.FAILED;
+            } else {
+                DBUtil.execute(employeeDao.setAccount());
+                return Result.SUCCESS;
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        return Result.FAILED;
     }
 }

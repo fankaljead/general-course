@@ -26,7 +26,6 @@ public class EmployeeDao {
         // 判断是否有返回值
         if (resultSet.next()) {
             // 返回密码
-            System.out.println("password password");
             String password = resultSet.getString("password");
             if (password == "" || password.equals("") || password == null) {
                 return null;
@@ -35,5 +34,13 @@ public class EmployeeDao {
         }
 //        System.out.println("password" + resultSet.getString("password"));
         return null;
+    }
+
+    public String setAccount() {
+        StringBuffer sql = new StringBuffer();
+
+        sql.append("update employee set account=(select max(id) from employee) where id=(select max(id) from employee)");
+
+        return sql.toString();
     }
 }

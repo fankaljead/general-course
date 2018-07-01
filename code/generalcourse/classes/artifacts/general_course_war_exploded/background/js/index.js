@@ -67,3 +67,14 @@ function loginClick() {
         }
     })
 }
+<<<<<<< HEAD
+=======
+
+$(document).ready(function(c) {
+    $('.close').on('click', function(c){
+        $('.login-form').fadeOut('slow', function(c){
+            $('.login-form').remove();
+        });
+    });
+});
+>>>>>>> 245f3621a32cd5ce0f32bcb96aff946b35bbff32

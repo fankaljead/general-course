@@ -1,6 +1,8 @@
 package cn.edu.cqut.pojo;
 
+import cn.edu.cqut.util.Column;
 import cn.edu.cqut.util.Status;
+import cn.edu.cqut.util.Table;
 import cn.edu.cqut.util.WhetherTop;
 
 /**
@@ -11,15 +13,31 @@ import cn.edu.cqut.util.WhetherTop;
  * @email: 728678732@qq.com
  * @description: 文章类
  **/
-public class Article {
+@Table(name = "article", caption = "article")
+public class Article extends Entity {
 
+    @Column(isId = true, type = "int", caption = "resourceId", name = "id")
     private Integer id;// 文章id
+
+    @Column(caption = "title", name = "title")
     private String title;// 文章标题
+
+    @Column(type = "int", name = "employeeId", caption = "employeeId")
     private Integer employeeId;// 发布文章人的id
+
+    @Column(type = "int", name = "columnId", caption = "columnId")
     private Integer columnId;// 发布的栏目id
+
+    @Column(name = "content", caption = "content")
     private String content;// 文章内容
+
+    @Column(name = "createTime", caption = "createTime")
     private String createTime;// 文章创建时间
+
+    @Column(type = "int", name = "whetherTop", caption = "whetherTop")
     private Integer whetherTop = WhetherTop.UN_TOP;// 默认为不置顶
+
+    @Column(type = "int", name = "status", caption = "status")
     private Integer status = Status.NOT_AUDIT;// 默认为未审核
 
     public Article() {

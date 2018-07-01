@@ -2,7 +2,7 @@
 
 ## 前台页面 ##
 
-1. getColunms 获取栏目信息
+1. getColumns 获取栏目信息  已完成
 
     **前台参数**
     - level: （0表示父栏目，1表示子栏目，一共两层目录）
@@ -18,7 +18,7 @@
     - 进入首页直接请level为0的栏目
     - 点击某个栏目传level为1和点击栏目的id
 
-2. getResources 获取资源 包括文章和文件等资源(**后台管理也可以使用**)
+2. getResources 获取资源 包括文章和文件等资源(**后台管理也可以使用**) 已完成
 
     **前台参数**
     - columnId: 栏目id
@@ -37,16 +37,24 @@
     - columnId: 栏目id
     - columnName: 栏目名称
 
-1. getResourceContent 获取资源详情（既可以获取文章也可以获取文件）(**后台管理也可以使用**)
+1. getResourceContent 获取资源详情（既可以获取文章也可以获取文件）(**后台管理也可以使用**) 已完成
 
     **前台参数**
     - resourceId: 资源id
 
-    **后台返回JSON数组**
+    **后台返回JSON字符串**
+	- resourceId: 资源id
     - content: 资源内容
     - path: 资源路径
+    - title: 资源标题
+    - createTime: 创建时间
+    - whetherTop: 是否置顶
+    - status: 资源状态
+    - columnId: 栏目id
+    - columnName: 栏目名称
+	- fileName: 文件名
 
-2. search 全站搜索
+2. search 全站搜索 已完成
 
     **前台参数**
     - keyWords: 关键字
@@ -60,7 +68,7 @@
     - status: 文章状态
     - path: 资源路径
 
-3. addMessage 新增留言
+3. addMessage 新增留言 已完成
 
     **前台参数**
     - content: 留言内容
@@ -70,11 +78,11 @@
     **后台返回int**
     - result: 留言成功1，留言失败0
 
-4. getMessages 获取留言(**后台管理也可以使用**)
+4. getMessages 获取留言(**后台管理也可以使用**) 已完成
 
     **前台参数**
-    - page: 当前页码
-    - pageIndex: 每页多少个
+    - pageIndex: 当前页码
+    - pageSize: 每页多少个
     - status 默认为1 (1为已经回复，0为未回复，2为全选，可选)
 
     **后台返回JSON数组**
@@ -103,7 +111,7 @@
 
 ## 后台登录 ##
 
-1. login 登录方法
+1. login 登录方法 已完成
 
     **前台参数:**
     - account
@@ -125,7 +133,7 @@
 
 ### 后台管理整体页面 ###
 
- 1. getModule 获取模块
+ 1. getModule 获取模块 已完成
  
     **前台参数:**
     - 无
@@ -158,21 +166,44 @@
 
 #### 留言管理 ####
 
-1. deleteMessages 删除留言
+1. deleteMessages 删除留言 已完成
 
     **前台参数**
     - messageIds: 需要删除留言的id
+	~~~
+	格式为:
+	
+	messageIds:
+		[
+			{
+				messageId: 0,
+			}
+			{
+				messageId: 1,
+			}
+			...
+		]
+	
+	~~~
 
     **后台返回int**
     - result: 成功1，失败0
 
-1. replyMessage 回复留言
+1. replyMessage 回复留言  已完成
 
     **前台参数**
+	-- messageId: 留言id
+	- reply: 回答内容
+	- replyTime: 回答时间
+	- status: 留言状态
+	
+	**后台返回int**
+    - result: 成功1，失败0
+	
 
 #### 文章管理和审核文章 ###
 
-1. addResource 添加资源
+1. addResource 添加资源 已完成
 
     **前台参数**
     - title: 资源名称
@@ -181,6 +212,15 @@
     - content: 资源内容
     - createTime: 创建时间
     - whetherTop: 是否置顶
+
+    **后台返回int**
+    - result: 成功1，失败0
+
+1. addFile 上传文件
+
+    **前台参数**
+    - fileName: 文件名
+    - file: 文件资源
 
     **后台返回int**
     - result: 成功1，失败0
@@ -202,15 +242,22 @@
         - status: 文章状态(0:未审核 1: 审核通过 2:审核不通过)
         - resourceId: 资源id
 
-        **2 删除**
-        - resourceIds: 所选要删除资源的id
+       
 
     **后台返回int**
     - result: 成功1，失败0
 
+1. deleteResources 删除资源 已完成
+
+	 **前台参数**
+     - resourceIds: 所选要删除资源的id
+	 
+	 **后台返回int**
+	 - result: 成功1，失败0
+	
 #### 栏目管理 ####
 
-1. updateColumn 更新栏目
+1. updateColumn 更新栏目 已完成
 
     **前台参数**
     - columnId: 栏目id
@@ -225,7 +272,7 @@
 
 #### 模块管理 ###
 
-1. updateModule 更新模块
+1. updateModule 更新模块  已完成
 
     **前台参数**
     - moduleId: 模块id
@@ -238,7 +285,7 @@
 
 #### 角色分配 ####
 
-1. assignRole 分配角色(一个用户只能分配一个角色)
+1. assignRole 分配角色(一个用户只能分配一个角色) 已完成
 
     **前台参数**
     - employeeId: 被分配角色人员id
@@ -250,7 +297,7 @@
 
 #### 人员管理 ####
 
-1. addEmployee 新增用户
+1. addEmployee 新增用户 已完成
 
     **前台参数**
     - employeeName: 用户名字
@@ -326,6 +373,23 @@
     **后台返回int**
     - result: 成功1，失败0
 
+2. getRoleByAccount 获取登录的单个角色信息 已完成
+
+    **前台参数**
+    - 无
+
+    **后台返回JSON**
+    - roleId: 角色id
+    - roleName: 角色名称
+    - createTime: 角色被创建时间
+    - description: 角色的描述
+
 #### 首页信息设置 ####
 
 暂未开放
+
+
+## 注意 ##
+
+### 上传的时间格式都为 （2018-06-29 19:23:42） 这个类型 ###
+### 执行lib/js/CurrentTime.js 中的 Current()方法即可 ###
