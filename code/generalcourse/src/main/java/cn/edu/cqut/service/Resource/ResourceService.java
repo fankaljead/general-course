@@ -14,6 +14,7 @@ import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 
 /**
  * @author 周翔辉
@@ -67,6 +68,7 @@ public class ResourceService implements IResourceService{
         JSONArray array = new JSONArray();
 
         String sql = dao.getResources(columnId, title, startTime, endTime, pageIndex, pageSize);
+        System.out.println("sql:"+sql);
 
         try {
             ResultSet resultSet = DBUtil.query(sql);
@@ -224,5 +226,23 @@ public class ResourceService implements IResourceService{
             e.printStackTrace();
         }
         return null;
+    }
+
+    public Integer deleteResources(List<Integer> resourceIds) {
+        Integer isSuccess = Result.FAILED;
+
+        for (int i = 0; i < resourceIds.size(); i++) {
+            // 先将这个角色的权限删除
+
+            isSuccess = BaseDao.deleteById(resourceIds.get(i), Article.class);
+
+            // 添加失败直接返回
+            if (isSuccess != Result.SUCCESS) {
+                return isSuccess;
+            }
+
+        }
+
+        return isSuccess;
     }
 }

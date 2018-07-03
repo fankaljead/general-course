@@ -49,11 +49,27 @@ $(document).ready(function () {
                 p.innerText = data[i].moduleName;
 
 
+
                 for (var j = 0; j < data[i].subModules.length; j++) {
                     var li = document.createElement("li");
+                    li.setAttribute('id', "subModuleLi"+data[i].subModules[j].subModuleId)
                     li.innerText = data[i].subModules[j].subModuleName;
+                    var subModule = data[i].subModules[j];
+                    // 给每个模块添加点击事件，传染模块的id和事件ev
 
+                    li.setAttribute('onclick', 'moduleClick('+JSON.stringify(subModule) +')')
                     ul.appendChild(li);
+                    // li.onclick = function (ev) {
+                    //     return moduleClick(subModuleId, this);
+                    // }
+                    // (function(li){
+                    //     // document.getElementById('subModuleLi'+data[i].subModules[j].subModuleId)
+                    //     li.addEventListener('click', function () {
+                    //         moduleClick(subModuleId, this);
+                    //     }, false);
+                    //
+                    // })(i)
+
                 }
 
                 var module_div = document.getElementById('module_div');

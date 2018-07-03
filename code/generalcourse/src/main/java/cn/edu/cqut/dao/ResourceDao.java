@@ -62,14 +62,15 @@ public class ResourceDao {
 
         // 判断是否进行时间开始搜索
         if (!(startTime == null || startTime.equals("") || startTime.equals("undefined"))) {
-            sql.append(" and createTime between " + startTime);
+            sql.append(" and createTime between '" + startTime + "' ");
         }
 
         // 判断是否进行时间最后范围搜索
         if (!(endTime == null || endTime.equals("") || endTime.equals("undefined"))) {
-            sql.append(endTime);
+            sql.append(" and '"+endTime+"' ");
         }
-
+        System.out.println("dao start time:" + startTime);
+        System.out.println("dao end time:" + endTime);
 
         // 分页
         if (pageIndex == null || pageIndex == 0) {
@@ -81,7 +82,7 @@ public class ResourceDao {
         }
 
         // 按照时间排序，由新到旧
-        sql.append("order by article.createTime desc");
+        sql.append(" order by article.createTime desc");
 
         // 获取的第一条记录的下标
         Integer start = (pageIndex - 1) * pageSize;

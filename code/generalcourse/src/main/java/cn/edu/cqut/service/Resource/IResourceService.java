@@ -5,6 +5,8 @@ import cn.edu.cqut.pojo.File;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 
+import java.util.List;
+
 /**
  * @author 周翔辉
  * @create: 2018年06月29日
@@ -70,4 +72,7 @@ public interface IResourceService {
      * @return Result.SUCCESS 成功 Result.FAILED 失败
      */
     public File downloadFile(Integer fileId);
+
+
+    public Integer deleteResources(List<Integer> resourceIds);
 }

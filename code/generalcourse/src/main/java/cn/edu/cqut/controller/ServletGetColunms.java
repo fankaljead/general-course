@@ -28,7 +28,7 @@ public class ServletGetColunms extends HttpServlet {
             String levelString = request.getParameter("level");
             String columnIdString = request.getParameter("columnId");
 
-            Integer level = 0;
+            Integer level = -1;
             Integer columnId = 0;
 
             // 判断前台传的值是否为空

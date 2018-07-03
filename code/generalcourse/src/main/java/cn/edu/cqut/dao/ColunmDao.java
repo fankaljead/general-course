@@ -29,9 +29,16 @@ public class ColunmDao {
         StringBuffer sql = new StringBuffer();
         sql.append("select * from colunm where level=" + level);
 
-        if (colunmId != null) {
+        if (colunmId != 0) {
             sql.append(" and parentId=" + colunmId);
         }
+
+        if (level == -1 && colunmId == 0) {
+            sql = new StringBuffer();
+            sql.append("select * from colunm");
+        }
+
+        System.out.println("level sql:" + sql);
 
         try {
             ResultSet resultSet = DBUtil.query(sql.toString());

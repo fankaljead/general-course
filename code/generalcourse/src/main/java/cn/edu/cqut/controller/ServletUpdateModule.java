@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-@WebServlet(name = "ServletUpdateModule")
+@WebServlet(name = "ServletUpdateModule", urlPatterns = {"/updateModule"})
 public class ServletUpdateModule extends HttpServlet {
 
     private IModuleService service = new ModuleService();
