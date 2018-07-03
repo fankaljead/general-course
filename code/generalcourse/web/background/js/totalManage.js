@@ -18,5 +18,10 @@ function moduleClick(module) {
         case 100001:
             messageModuleClick(100001);
             break;
+
+        case 100000:
+            messageClick(100000);
+            break;
     }
 }
+
