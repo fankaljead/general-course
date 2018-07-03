@@ -27,6 +27,7 @@ body{
 }
 
 .login{
+    margin-top: 25px;
     background-color: yellow;
     padding: 5px 10px 5px 10px;
     text-align: right;
@@ -59,11 +60,7 @@ body{
     width: 85%;
     height: 100%;
     float: right;
-<<<<<<< HEAD
-    background-color: #ffffff;
-=======
     background-color: #F3F3F3;
->>>>>>> b96f9fc801e85658e32fe903c2783f506ca0d32b
 }
 
 .nav-nav p{
@@ -83,12 +80,15 @@ body{
     text-align: center;
     background-color: #9d9d9d;
 }
+
 .content-main-table {
     width: 80%;
     float: right;
 }
+
 #left-column {
     width: 20%;
+    background-color: #F3F3F3;
     float: left;
 }
 #form-info {

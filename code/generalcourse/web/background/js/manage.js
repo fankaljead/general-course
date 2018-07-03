@@ -5,7 +5,7 @@ function refreshTime() {
     $(".time").append(time);
 }
 $(function () {
-    setInterval("refreshTime()",100);
+    setInterval("refreshTime()",1000);
 })
 
 //点击侧边栏菜单显示子菜单
