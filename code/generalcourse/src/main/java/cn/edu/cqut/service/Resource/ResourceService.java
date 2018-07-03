@@ -117,7 +117,7 @@ public class ResourceService implements IResourceService{
             if (resultSet.next()) {
                 object.put("resourceId", resultSet.getInt("article.id"));
                 object.put("content", resultSet.getString("content"));
-                object.put("path", resultSet.getString("path"));
+//                object.put("path", resultSet.getString("path"));
                 object.put("title", resultSet.getString("title"));
                 object.put("createTime", resultSet.getString("createTime"));
                 object.put("whetherTop", resultSet.getInt("whetherTop"));
@@ -156,8 +156,8 @@ public class ResourceService implements IResourceService{
                 object.put("createTime", set.getString("article.createTime"));
                 object.put("whetherTop", set.getInt("article.whetherTop"));
                 object.put("status", set.getInt("article.status"));
-                object.put("path", set.getString("file.path"));
-                object.put("fileName", set.getString("file.name"));
+//                object.put("path", set.getString("file.path"));
+//                object.put("fileName", set.getString("file.name"));
 
                 array.add(object);
             }
