@@ -32,4 +32,25 @@ public class RoleDao {
 
         return sql.toString();
     }
+
+    /**
+     * 通过角色id 获取权限
+     * @param roleId
+     * @return
+     */
+    public String getPermissionsByRoleId(Integer roleId){
+        StringBuffer sql = new StringBuffer();
+
+        sql.append("SELECT\n" +
+                "\t*\n" +
+                "FROM\n" +
+                "\trole\n" +
+                "LEFT OUTER JOIN permission ON (role.id = permission.roleId),\n" +
+                " submodule\n" +
+                "WHERE\n" +
+                "\tpermission.moduleId = submodule.id\n" +
+                "AND role.id = " + roleId);
+
+        return sql.toString();
+    }
 }

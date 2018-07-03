@@ -35,6 +35,8 @@
     - whetherTop: 是否置顶
     - status: 资源状态
     - columnId: 栏目id
+	- fileId: 文件id
+	- fileName: 文件名
     - columnName: 栏目名称
 
 1. getResourceContent 获取资源详情（既可以获取文章也可以获取文件）(**后台管理也可以使用**) 已完成
@@ -410,6 +412,25 @@
     **后台返回int**
     - result: 成功1，失败0
 
+1. getPermissionsByRoleId 获取角色权限
+	
+	**前台参数**
+	- roleId: 角色id
+	
+	**后台返回JSON数组**
+	~~~
+		[
+			{
+				moduleId: 板块id(subModule表)一个对应权限,
+				moduleName: 模块名称,
+				permissionId: 权限id,
+				roleId: 角色id,
+				roleName: 角色名称 
+			} ...
+		]
+	~~~
+	
+	
 1. deleteRoles 删除角色 已完成
 
     **前台参数**

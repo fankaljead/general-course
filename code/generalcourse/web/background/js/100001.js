@@ -418,6 +418,27 @@ function showDetail(rowId) {
     div_for_show_columnName.appendChild(show_for_show_columnName);
     form.appendChild(div_for_show_columnName);
 
+
+    // // 文件名称
+    var div_for_show_file= document.createElement("div");
+    div_for_show_file.setAttribute('class', 'form-group');
+    var label_for_show_file= document.createElement("label");
+    label_for_show_file.innerText = "文件";
+    var file_a = document.createElement("a");
+    div_for_show_file.appendChild(document.createElement("br"));
+    div_for_show_file.appendChild(file_a);
+    div_for_show_file.style = "display: none";
+    // var show_for_show_file= document.createElement("input");
+    // show_for_show_file.setAttribute('type', 'text');
+    // show_for_show_file.setAttribute('disabled', 'true');
+    // show_for_show_file.setAttribute('class', 'form-control');
+    // show_for_show_file.setAttribute('id', 'message_show_file_id');
+    div_for_show_file.appendChild(label_for_show_file);
+    // div_for_show_file.appendChild(show_for_show_file);
+    // 判断是否有文件
+    // form.appendChild(div_for_show_columnName);
+    form.appendChild(div_for_show_file);
+
     // 内容
     var div_for_show_content= document.createElement("div");
     div_for_show_content.setAttribute('class', 'form-group');
@@ -446,6 +467,12 @@ function showDetail(rowId) {
             $('#message_show_createTime_id').val(data.createTime);
             $('#message_show_whetherTop_id').val(data.whetherTop == 0 ? "不置顶" : "置顶");
             $('#message_show_columnName_id').val(data.columnName);
+
+            if (data.fileId != 0) {
+                div_for_show_file.style = "display: block";
+                file_a.setAttribute('href', '/downloadFile?fileId='+data.fileId);
+                file_a.innerText = data.fileName;
+            }
 
             if (data.status == 0) {
                 $('#message_show_status_id').val("未审核");

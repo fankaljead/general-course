@@ -2,6 +2,7 @@ package cn.edu.cqut.service.role;
 
 import cn.edu.cqut.pojo.Employee;
 import cn.edu.cqut.pojo.Role;
+import com.alibaba.fastjson.JSONArray;
 
 import java.util.List;
 
@@ -56,4 +57,18 @@ public interface IRoleService {
      * @return
      */
     public Integer deleteRoles(List<Integer> roleIds);
+
+
+    /**
+     * 获取角色权限
+     * @param roleId
+     * @return [
+     * 			{
+     * 				moduleId: 板块id(subModule表)一个对应权限,
+     * 				moduleName: 模块名称,
+     * 				permissionId: 权限id,
+     * 			} ...
+     * 		]
+     */
+    public JSONArray getPermissionsByRoleId(Integer roleId);
 }
