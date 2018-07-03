@@ -1,12 +1,9 @@
 //动态显示时间
 function refreshTime() {
     var time = new Date().toLocaleString(); //当前时间
-    $(".time").css({"background-color":"red"});
     $(".time").empty();
     $(".time").append(time);
 }
-
-
 $(function () {
     setInterval("refreshTime()",100);
 })
@@ -15,7 +12,14 @@ $(function () {
 $(function showMenu() {
     $(".nav-nav p").click(function () {
         $(this).parent().siblings().children("ul").css({"display":"none"});
-        $(this).siblings().css({"display":"block"});
+
+        var ul = $(this).siblings("ul");
+        if (ul.css("display") == "none") {
+            ul.css({"display":"block"});
+        }
+        else {
+            ul.css({"display":"none"});
+        }
     })
 })
 
@@ -77,10 +81,17 @@ $(document).ready(function () {
                 div.appendChild(ul);
 
                 p.addEventListener('click', function (ev) {
-
                     $(this).parent().siblings().children("ul").css({"display":"none"});
-                    $(this).siblings().css({"display":"block"});
+
+                    var ul = $(this).siblings("ul");
+                    if (ul.css("display") == "none") {
+                        ul.css({"display":"block"});
+                    }
+                    else {
+                        ul.css({"display":"none"});
+                    }
                 })
+
                 module_div.appendChild(div);
             }
         }
