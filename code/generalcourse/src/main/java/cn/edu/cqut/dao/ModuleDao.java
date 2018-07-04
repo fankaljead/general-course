@@ -80,4 +80,16 @@ public class ModuleDao {
 
         return jsonArray;
     }
+
+    /**
+     * 获取所有子模块
+     * @return
+     */
+    public String getAllSubmodules() {
+        StringBuffer sql = new StringBuffer();
+
+        sql.append("select * from submodule");
+
+        return  sql.toString();
+    }
 }

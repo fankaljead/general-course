@@ -162,7 +162,24 @@
 
     **后台实现**：通过获取session中的account账号找到对应的roleId，然后通过roleId获取所对应的权限对应的板块
 
+1. getAllSubModules 获取所有子模块
 
+	**前台参数:**
+    - 无
+	
+	**后台返回一个JSON数组，包含父模块基本信息和子模块基本信息**
+     
+    ~~~
+    [
+		{
+			moduleId: 模块id，
+			moduleName: 模块名字，
+			parentModuleId: 父模块id，
+			status： 是否被禁用
+		}
+        ...
+    ]    
+    ~~~
 
 ### 网站内容管理 ###
 
