@@ -237,7 +237,7 @@ function createMessageForm(column) {
     input_for_input_add.setAttribute('value', '新增');
     input_for_input_add.setAttribute('class', 'form-control');
     input_for_input_add.setAttribute('id', 'message_input_add_id');
-    div_for_input_add.style = "backgroud: #2AABD2;"
+    div_for_input_add.style = "backgroud: #2AABD2;margin-top: 25px;"
     div_for_input_add.appendChild(input_for_input_add);
     form.appendChild(div_for_input_add);
     input_for_input_add.addEventListener('click', function (ev) {

@@ -62,4 +62,23 @@ public class ColunmDao {
 
         return array;
     }
+
+    /**
+     * 获取所有二级栏目
+     * @return
+     */
+    public String getSecondColumns() {
+        StringBuffer sql = new StringBuffer();
+
+        sql.append("SELECT\n" +
+                "\t*\n" +
+                "FROM\n" +
+                "\t\n" +
+                "\tcolunm as parent,\n" +
+                "colunm\n" +
+                "WHERE\n" +
+                "\tcolunm.id = parent.parentId");
+
+        return sql.toString();
+    }
 }

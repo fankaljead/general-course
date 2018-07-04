@@ -45,7 +45,7 @@ public interface IEmployeeService {
      * @param condition 条件
      * @return employee数组
      */
-    public List<Employee> getEmployees(Integer roleId, Integer pageIndex, Integer pageSize, String condition);
+    public JSONArray getEmployees(Integer roleId, Integer pageIndex, Integer pageSize, String condition);
 
 
     /**
