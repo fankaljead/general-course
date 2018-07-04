@@ -12,6 +12,6 @@
   </head>
   <body>
   <a href="background/index.html">后台管理</a>
-  <a href="front/index.html">首页</a>
+  <a href="front/课程研究.html">首页</a>
   </body>
 </html>

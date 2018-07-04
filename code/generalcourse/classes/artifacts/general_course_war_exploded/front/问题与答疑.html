@@ -1,0 +1,112 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="gb2312">
+  <title>通用课程网站</title>
+  <meta name="keywords" content="建材模板" />
+  <meta name="description" content="建材模板" />
+  <link href="css/base.css" rel="stylesheet" type="text/css">
+  <link href="css/main.css" rel="stylesheet" type="text/css">
+  <!--[if lt IE 9]>
+  <script src="js/modernizr.js"></script>
+  <![endif]-->
+  <script type="text/javascript" src="js/jquery.js"></script>
+  <script type="text/javascript" src="js/js.js"></script>
+</head>
+<body>
+<header>
+  <div id="logo">
+    <img src="images/下载.jpg"  style="width:  100px;height:  100px; position: relative;
+              top: 50px;">
+    <ul class="search">
+      <form name="SearchForm" method="post" action="Search.asp" onSubmit="return doSubmit()">
+        <input name="SearchKey" type="text" class="input_text"id="SearchKey" value="请输入关键词" onfocus="if(this.value=='请输入关键词'){this.value=''};this.style.color='black';" onblur="if(this.value==''||this.value=='请输入关键词'){this.value='请输入关键词';this.style.color='#DFDFDF';}"/>
+        <input type="submit" name="Submit" value="" class="input_submit" />
+      </form>
+    </ul>
+  </div>
+  <div class="banner"><img src="images/banner.jpg" style="width:  1000px;height:  280px;"></div>
+  <nav class="topnav" id="topnav">
+    <!--<a href="首页.html" target="_blank">首页</a>-->
+    <!--<a href="课程介绍.html" target="_blank">课程介绍</a>-->
+    <!--<a href="教学团队.html" target="_blank">教学团队</a>-->
+    <!--<a href="课程建设.html" target="_blank">课程建设</a>-->
+    <!--<a href="课程资源.html" target="_blank">课程资源</a>-->
+    <!--<a href="/" target="_blank">问题与答疑</a>-->
+    <!--<a href="课程研究.html" target="_blank">课程研究</a>-->
+
+    <span class="nav_l"></span><span class="nav_r"></span></nav>
+  <script src="js/tabs.js"></script>
+</header>
+<div class="blank"></div>
+<article class="con_content">
+  <div class="con_left">
+    <ul id="con_left_list">
+      <li><a href="/">常见问题与答疑</a></li>
+
+    </ul>
+  </div>
+  <div class="about_box">
+    <h2 class="nh1"><span>您现在的位置是：<a href="/" target="_blank">网站首页</a>>><a href="#" target="_blank">问题与答疑</a></span><b>问题与答疑</b></h2>
+    <ul class="news_list" id="news_list">
+
+      <li><span>2012-6-6</span><a href="#">1111111111111111111</a></li>
+      <li><span>2012-6-6</span><a href="#">222222222222222</a></li>
+      <li><span>2012-6-6</span><a href="#">33333333333333333333333333333</a></li>
+      <li><span>2012-6-6</span><a href="#">44444444444444444444</a></li>
+      <li><span>2012-6-6</span><a href="#">5555555555555555555555555</a></li>
+      <li><span>2012-6-6</span><a href="#">1111111111111111111</a></li>
+      <li><span>2012-6-6</span><a href="#">222222222222222</a></li>
+      <li><span>2012-6-6</span><a href="#">33333333333333333333333333333</a></li>
+      <li><span>2012-6-6</span><a href="#">44444444444444444444</a></li>
+      <li><span>2012-6-6</span><a href="#">5555555555555555555555555</a></li>
+      <li><span>2012-6-6</span><a href="#">1111111111111111111</a></li>
+      <li><span>2012-6-6</span><a href="#">222222222222222</a></li>
+      <li><span>2012-6-6</span><a href="#">33333333333333333333333333333</a></li>
+      <li><span>2012-6-6</span><a href="#">44444444444444444444</a></li>
+      <li><span>2012-6-6</span><a href="#">5555555555555555555555555</a></li>
+
+    </ul>
+  </div>
+  <div class="blank"></div>
+</article>
+<question >
+  <STYLE>
+    td{width:20%;height:20px;border-bottom:1px solid black;border-right:1px solid black;cursor:default;}
+    div{font-size:13px;}
+    th{height:20px;font-size:12px;font-weight:normal;border-bottom:2px solid black;background-color:#CCCCCC}
+    table{border:1px solid black;font-size:13px;}
+  </STYLE>
+  <div align="center">
+  <TABLE name="tableName" width="70%" align="center" cellpadding="0" cellspacing="0">
+    <TR>
+      <TH colspan="4" style="">留言版</TH>
+    </TR>
+    <TR>
+      <TD>留下你的问题。老师解答后会公布在上面。</TD>
+    </TR>
+  </TABLE>
+    </div>
+  <BR>
+  <div align="center">
+<textarea rows="2" name="textName" id="textId" cols="20"
+          style="width: 70%; height:100px;clip: rect(0pt, 47pt, 18pt, 0pt); font-family: 宋体; font-size: 15pt; font-weight: normal; font-style: normal;text-align: left; vertical-align: middle; text-indent: 0; color: #000000; background-attachment: fixed; background-color: #EEEEEE; border: 1px solid #0xf8f8f8">
+</textarea>
+  </div>
+  <BR>
+  <div align="center">
+    <input type="button" value="提交" onclick="return Ok_OnClick(window.event);"
+           style="align:center ; width:60 ; height: 21; clip: rect(0pt, 47pt, 18pt, 0pt); font-family: 宋体; font-size: 10pt; font-weight: normal; font-style: normal; cursor: hand; text-align: center; vertical-align: middle; text-indent: 0; color: #000000; background-attachment: fixed; background-color: #d8d8d8; border: 1px solid #59b4f7">
+    <!--position: absolute; left: 342; top: 184; -->
+  </div>
+</question>
+<footer>
+  <p>重庆理工大学<span>制作：josh</span></p>
+</footer>
+<!-- 代码开始 -->
+
+<a id="gotop" href="javascript:void(0)"></a>
+<!-- 代码结束 -->
+</body>
+<script src="js/new.js"></script>
+</html>
