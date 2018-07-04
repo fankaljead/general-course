@@ -60,10 +60,6 @@ body{
     width: 85%;
     height: 100%;
     float: right;
-<<<<<<< HEAD
-=======
-
->>>>>>> 35471a6802627acbdee7d0cb972d6deb29248aec
     background-color: #F3F3F3;
 }
 
@@ -91,14 +87,7 @@ body{
 }
 
 #left-column {
-<<<<<<< HEAD
-    width: 20%;
-    background-color: #F3F3F3;
-    float: left;
-=======
-    /*width: 20%;*/
-    /*float: left;*/
->>>>>>> 35471a6802627acbdee7d0cb972d6deb29248aec
+
 }
 #form-info {
     width: 80%;

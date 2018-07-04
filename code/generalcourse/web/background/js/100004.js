@@ -191,14 +191,14 @@ function readyToEditModule(row) {
             method: 'post',
             success: function (data) {
                 if (data == 1) {
-                    alert("修改成功！");
+                    sweetAlert("修改成功！");
                     var opt = {
                         url: '/getAllSubModules',
                         silent: true,
                     };
                     $('#table').bootstrapTable('refresh',opt);
                 } else {
-                    alert("修改失败");
+                    sweetAlert("修改失败");
                 }
             }
         })

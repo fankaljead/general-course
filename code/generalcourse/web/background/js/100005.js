@@ -90,56 +90,71 @@ function readyToRoleDistribute(row) {
     console.log("role row:", row)
     var form = document.createElement("form");
 
-    $('#myModalLabelTitle').text("编辑角色信息");
+    $('#myModalLabelTitle').text("添加角色");
 
     var modal_body = document.getElementById('modal-body');
     $('#modal-body').empty();
 
-    // 角色id
-    var div_for_show_id = document.createElement("div");
-    div_for_show_id.setAttribute('class', 'form-group');
-    var label_for_show_id = document.createElement("label");
-    label_for_show_id.setAttribute('for', 'resourceId');
-    label_for_show_id.innerText = "角色id";
-    var show_for_show_id = document.createElement("input");
-    show_for_show_id.setAttribute('type', 'text');
-    show_for_show_id.setAttribute('class', 'form-control');
-    show_for_show_id.setAttribute('id', 'message_show_id');
-    div_for_show_id.appendChild(label_for_show_id);
-    div_for_show_id.appendChild(show_for_show_id);
-    form.appendChild(div_for_show_id);
-    show_for_show_id.value = row.roleId;
+    // 员工帐号
+    var div_for_show_account = document.createElement("div");
+    div_for_show_account.setAttribute('class', 'form-group');
+    var label_for_show_account = document.createElement("label");
+    label_for_show_account.setAttribute('for', 'resourceId');
+    label_for_show_account.innerText = "帐号";
+    var show_for_show_account = document.createElement("input");
+    show_for_show_account.setAttribute('type', 'text');
+    show_for_show_account.setAttribute('disabled', 'true');
+    show_for_show_account.setAttribute('class', 'form-control');
+    show_for_show_account.setAttribute('id', 'message_show_id');
+    div_for_show_account.appendChild(label_for_show_account);
+    div_for_show_account.appendChild(show_for_show_account);
+    form.appendChild(div_for_show_account);
+    show_for_show_account.value = row.account;
 
-    // 角色名字
+    // 员工名字
     var div_for_show_name = document.createElement("div");
     div_for_show_name.setAttribute('class', 'form-group');
     var label_for_show_name = document.createElement("label");
     label_for_show_name.setAttribute('for', 'resourceName');
-    label_for_show_name.innerText = "角色名称";
+    label_for_show_name.innerText = "姓名";
     var show_for_show_name = document.createElement("input");
     show_for_show_name.setAttribute('type', 'text');
+    show_for_show_name.setAttribute('disabled', 'true');
     show_for_show_name.setAttribute('class', 'form-control');
     show_for_show_name.setAttribute('id', 'message_show_name');
     div_for_show_name.appendChild(label_for_show_name);
     div_for_show_name.appendChild(show_for_show_name);
     form.appendChild(div_for_show_name);
     // $('#message_show_name').val(row.employeeName+"");
-    show_for_show_name.value = row.roleName;
+    show_for_show_name.value = row.employeeName;
 
-    // 描述
-    var div_for_show_description = document.createElement("div");
-    div_for_show_description.setAttribute('class', 'form-group');
-    var label_for_show_description = document.createElement("label");
-    label_for_show_description.setAttribute('for', 'resourceDescription');
-    label_for_show_description.innerText = "角色描述";
-    var show_for_show_description = document.createElement("input");
-    show_for_show_description.setAttribute('type', 'text');
-    show_for_show_description.setAttribute('class', 'form-control');
-    show_for_show_description.setAttribute('id', 'message_show_description');
-    div_for_show_description.appendChild(label_for_show_description);
-    div_for_show_description.appendChild(show_for_show_description);
-    form.appendChild(div_for_show_description);
-    show_for_show_description.value = row.description;
+    // 角色选择
+    var div_for_show_role= document.createElement("div");
+    div_for_show_role.setAttribute('class', 'form-group');
+    var label_for_show_role= document.createElement("label");
+    label_for_show_role.innerText = "父模块名称";
+    var  select_role = document.createElement("select");
+    select_role.setAttribute('id', "add_role_select_id")
+    select_role.style = "width: 568px;\n" +
+        "    height: 38px;    border: 1px solid #ccc;\n" +
+        "    border-radius: 4px;";
+    $.ajax({
+        url: '/getRoles',
+        method: 'post',
+        success: function (data) {
+            data = JSON.parse(data);
+            for (var i = 0; i < data.length; i++) {
+                var option_role = document.createElement("option");
+                option_role.setAttribute('value', data[i].roleId);
+                option_role.innerText = data[i].roleName;
+                select_role.appendChild(option_role);
+            }
+        }
+    })
+    div_for_show_role.appendChild(label_for_show_role);
+    div_for_show_role.appendChild(document.createElement("br"));
+    div_for_show_role.appendChild(select_role);
+    form.appendChild(div_for_show_role);
 
     modal_body.appendChild(form);
 
@@ -148,21 +163,19 @@ function readyToRoleDistribute(row) {
 
     modal_submit_id.onclick = function (ev1) {
         $.ajax({
-            url: '/updateRole?roleId='+$('#message_show_id').val()
-            +"&roleName="+row.account
-            +"&description="+$('#add_sex_select_id option:selected').val()
-            +"&ownModuleIds=",
+            url: '/assignRole?employeeId='+$('#message_show_id').val()
+            +"&roleId="+$('#add_role_select_id option:selected').val(),
             method: 'post',
             success: function (data) {
                 if (data == 1) {
-                    alert("修改成功！");
+                    sweetAlert("修改成功！");
                     var opt = {
                         url: '/getEmployees',
                         silent: true,
                     };
                     $('#table').bootstrapTable('refresh',opt);
                 } else {
-                    alert("修改失败");
+                    sweetAlert("修改失败");
                 }
             }
         })
