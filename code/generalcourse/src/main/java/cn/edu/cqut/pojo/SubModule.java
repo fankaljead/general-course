@@ -26,7 +26,7 @@ public class SubModule extends Entity {
     @Column(type = "int", name = "status", caption = "status")
     private Integer status = SubModule.ENABLE;// 模块状态 默认启用
 
-    @Column(type = "int", name = "parentId", caption = "parentModuleId")
+    @Column(type = "int", name = "parentModuleId", caption = "parentModuleId")
     private Integer parentId;// 父模块id
 
     public SubModule() {

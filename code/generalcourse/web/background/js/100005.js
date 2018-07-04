@@ -13,44 +13,45 @@ function roleDistribute(moduleId) {
         "                <table id=\"table\"></table>\n" +
         "            </div>");
 
-    addRoleManageTable({})
-    createRoleForm();
+    addEmployTable({})
 }
 
 /**
  * 添加表格 table
  * @param columnData
  */
-function addRoleManageTable(columnData) {
+function addEmployTable(columnData) {
     // $('#table').empty();
     $('#table').bootstrapTable({
-        url: '/getRoles',
+        url: '/getEmployees',
         columns: [{
-            field: 'roleId',
-            title: '角色id'
+            field: 'account',
+            title: '账号'
         }, {
-            field: 'roleName',
-            title: '角色名称'
+            field: 'employeeName',
+            title: '姓名'
         }, {
-            field: 'createTime',
-            title: '创建时间'
+            field: 'sex',
+            title: '性别'
         },{
-            field: 'description',
-            title: '描述'
+            field: 'roleId',
+            title: '角色编号'
         },
             {
                 title: '操作',
                 formatter: function (value, row, index) {
                     console.log("row", row)
-                    var b = "<span  data-toggle=\"modal\" onclick='readyToEditRole("+JSON.stringify(row)+")' data-target=\"#myModal\">\n" +
+                    var b = "<span  data-toggle=\"modal\" onclick='readyToRoleDistribute("+JSON.stringify(row)+")' data-target=\"#myModal\">\n" +
                         "\t编辑\n" +
                         "</span>";
-                    var c = '<span  class = "toWhite" \
-                        onclick = "readyToDeleteEmployee('+row.account+')"> 删除</span>';
-                    return b+c;
+                    return b;
                 }
             }
         ],
+
+        pagination: true,
+        pageSize: 5,
+        pageNumber:1,
 
         search: true,
         onCheck : function(row) {
@@ -85,7 +86,7 @@ function addRoleManageTable(columnData) {
 }
 
 
-function readyToEditRole(row) {
+function readyToRoleDistribute(row) {
     console.log("role row:", row)
     var form = document.createElement("form");
 
@@ -162,173 +163,6 @@ function readyToEditRole(row) {
                     $('#table').bootstrapTable('refresh',opt);
                 } else {
                     alert("修改失败");
-                }
-            }
-        })
-    }
-}
-
-function readyToDeleteEmployee(row) {
-    swal({
-        title: "您确定要删除吗？",
-        text: "您确定要删除这条数据？",
-        type: "warning",
-        showCancelButton: true,
-        closeOnConfirm: false,
-        animation: 'slide-from-top',
-        confirmButtonText: "是的，我要删除",
-        confirmButtonColor: "#ec6c62"
-    }, function () {
-        var ids = [];
-
-        $.ajax({
-            url: '/deleteRoles?roleIds='+row,
-            method: 'post',
-            success: function (data) {
-                if (data == 1) {
-                    var opt = {
-                        url: '/getEmployees',
-                        silent: true,
-                    };
-                    $('#table').bootstrapTable('refresh',opt);
-                }
-            }
-        })
-        swal.close()
-    });
-}
-
-function createRoleForm(column) {
-    var form_info = document.getElementById('form-info');
-    $('#form-info').empty();
-    var form = document.createElement("form");
-    form.setAttribute('role', 'form');
-
-    // data-toggle=\"modal\" onclick='showDetail("+row.resourceId+")' data-target=\"#myModal\">
-    // 新增按钮
-    var div_for_input_add = document.createElement("div");
-    div_for_input_add.setAttribute('class', 'col-lg-1');
-    var input_for_input_add = document.createElement("input");
-    input_for_input_add.setAttribute('data-toggle', 'modal');
-    input_for_input_add.setAttribute('data-target', '#myModal');
-    input_for_input_add.setAttribute('type', 'button');
-    input_for_input_add.setAttribute('value', '新增');
-    input_for_input_add.setAttribute('class', 'form-control');
-    input_for_input_add.setAttribute('id', 'message_input_add_id');
-    div_for_input_add.style = "backgroud: #2AABD2;"
-    div_for_input_add.appendChild(input_for_input_add);
-    form.appendChild(div_for_input_add);
-    input_for_input_add.addEventListener('click', function (ev) {
-        addRole(ev, column)
-    })
-
-    form_info.appendChild(form);
-}
-
-/**
- * 新增人员
- * @param ev
- */
-function addRole(ev, column) {
-    var form = document.createElement("form");
-    // $('#myModalLabel').empty();
-    $('#myModalLabelTitle').text("新增角色");
-
-    var modal_body = document.getElementById('modal-body');
-    $('#modal-body').empty();
-
-    // 角色名字
-    var div_for_show_name = document.createElement("div");
-    div_for_show_name.setAttribute('class', 'form-group');
-    var label_for_show_name = document.createElement("label");
-    label_for_show_name.setAttribute('for', 'resourceId');
-    label_for_show_name.innerText = "角色名字";
-    var show_for_show_name = document.createElement("input");
-    show_for_show_name.setAttribute('type', 'text');
-    show_for_show_name.setAttribute('class', 'form-control');
-    show_for_show_name.setAttribute('id', 'message_show_name_id');
-    div_for_show_name.appendChild(label_for_show_name);
-    div_for_show_name.appendChild(show_for_show_name);
-    form.appendChild(div_for_show_name);
-
-    // 角色描述
-    var div_for_show_description = document.createElement("div");
-    div_for_show_description.setAttribute('class', 'form-group');
-    var label_for_show_description = document.createElement("label");
-    label_for_show_description.setAttribute('for', 'resourceDescription');
-    label_for_show_description.innerText = "角色描述";
-    var show_for_show_description = document.createElement("input");
-    show_for_show_description.setAttribute('type', 'text');
-    show_for_show_description.setAttribute('class', 'form-control');
-    show_for_show_description.setAttribute('id', 'message_show_description_id');
-    div_for_show_description.appendChild(label_for_show_description);
-    div_for_show_description.appendChild(show_for_show_description);
-    form.appendChild(div_for_show_description);
-
-    // 模组
-    var div_for_show_ownModuleIds = document.createElement("div");
-    div_for_show_ownModuleIds.setAttribute('class', 'form-group');
-    var label_for_show_ownModuleIds = document.createElement("label");
-    label_for_show_ownModuleIds.setAttribute('for', 'resourceId');
-    label_for_show_ownModuleIds.innerText = "模组选择";
-    div_for_show_ownModuleIds.appendChild(label_for_show_ownModuleIds);
-    $.ajax({
-        url: "/getModule",
-        method: "post",
-        async: false,
-        success: function(data) {
-            data = JSON.parse(data);
-
-            var div_checkbox = document.createElement("div");
-            div_checkbox.setAttribute("id","div_checkbox_id");
-            for (var i = 0; i < data.length; i++) {
-                for (var j = 0; j < data[i].subModules.length; j++) {
-                    var input = document.createElement("input");
-                    input.setAttribute("type", "checkbox");
-                    input.setAttribute("value",""+data[i].subModules[j].subModuleId);
-                    div_checkbox.appendChild(input);
-                    div_checkbox.append(data[i].subModules[j].subModuleName);
-                    div_checkbox.appendChild(document.createElement("br"));
-                }
-            }
-
-            div_for_show_ownModuleIds.appendChild(div_checkbox);
-        }
-    })
-    form.appendChild(div_for_show_ownModuleIds);
-
-    var arr = new Array();
-    $("#div_checkbox_id :checkbox:checked").each(function(i){
-        arr[i] = $(this).val();
-        alert($(this).val());
-    });
-    var vals = arr.join(",");
-    console.log(vals);
-
-    modal_body.appendChild(form);
-
-    // 确认修改
-    var modal_submit_id = document.getElementById('modal_submit_id');
-
-    modal_submit_id.onclick = function (ev1) {
-        //创建时间
-        var createTime = CurrentTime();
-        $.ajax({
-            url: '/addRole ?roleName='+$('#message_show_name_id').val() +
-            "&createTime="+createTime
-            +"&description="+$('#message_show_description_id').val()
-            +"&ownModuleIds="+vals,
-            method: 'post',
-            success: function (data) {
-                if (data != 0) {
-                    alert("新增成功")
-                    var opt = {
-                        url: '/addRole',
-                        silent: true,
-                    };
-                    $('#table').bootstrapTable('refresh',opt);
-                } else {
-                    alert("新增失败");
                 }
             }
         })
