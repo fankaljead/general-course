@@ -194,13 +194,7 @@
 	
 	messageIds:
 		[
-			{
-				messageId: 0,
-			}
-			{
-				messageId: 1,
-			}
-			...
+			100000,1000001,...
 		]
 	
 	~~~
@@ -429,7 +423,7 @@
     **后台返回int**
     - result: 成功1，失败0
 
-1. getPermissionsByRoleId 获取角色权限
+1. getPermissionByRoleId 获取角色权限
 	
 	**前台参数**
 	- roleId: 角色id

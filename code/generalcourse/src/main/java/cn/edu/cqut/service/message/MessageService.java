@@ -13,6 +13,7 @@ import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 
 /**
  * @author 周翔辉
@@ -104,28 +105,30 @@ public class MessageService implements IMessageService{
         return array;
     }
 
+    /**
+     * 删除方法
+     * @param messageIds
+     * @return
+     */
+    public Integer deleteMessages(List<Integer> messageIds) {
+        Integer isSuccess = Result.FAILED;
 
-    public Integer deleteMessages(JSONArray array) {
-        if (array == null) {
-            return Result.FAILED;
-        }
-        for (int i = 0; i < array.size(); i++) {
-            System.out.println("id: " + JSONObject.parseObject(array.getString(i)).get("messageId"));
-            try {
-                EntityDao.deleteByID((Integer) JSONObject.parseObject(array.getString(i)).get("messageId"), Message.class);
-            } catch (SQLException e) {
-                e.printStackTrace();
-                return Result.FAILED;
-            } catch (IOException e) {
-                e.printStackTrace();
-                return Result.FAILED;
-            } catch (ClassNotFoundException e) {
-                e.printStackTrace();
-                return Result.FAILED;
+        for (int i = 0; i < messageIds.size(); i++) {
+
+
+            isSuccess = BaseDao.deleteById(messageIds.get(i), Message.class);
+
+            if (isSuccess != Result.SUCCESS) {
+                return isSuccess;
             }
+
         }
-        return Result.SUCCESS;
+
+        return isSuccess;
     }
+
+
+
 
     /**
      * 回答留言

@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.List;
 
 @WebServlet(name = "ServletDeleteMessages", urlPatterns = {"/deleteMessages"})
 public class ServletDeleteMessages extends HttpServlet {
@@ -22,11 +24,15 @@ public class ServletDeleteMessages extends HttpServlet {
 
         String messageIdsString = request.getParameter("messageIds");
 
+        PrintWriter out = response.getWriter();
+        List<Integer> messageIds = new ArrayList<Integer>();
         JSONArray array = JSONArray.parseArray(messageIdsString);
 
-        PrintWriter out = response.getWriter();
-
-        out.println(service.deleteMessages(array));
+        for (int i = 0; i < array.size(); i++) {
+            messageIds.add(Integer.valueOf(array.getString(i)));
+        }
+        
+        out.println(service.deleteMessages(messageIds));
 
         out.close();
     }
