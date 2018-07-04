@@ -101,8 +101,20 @@ public class ResourceDao {
     public String getResourceContent(Integer resourceId) {
         StringBuffer sql = new StringBuffer();
 
-        sql.append("select * from article left outer join colunm on (article.columnId=colunm.id), file  where article.id=file.articleId and article.id=" + resourceId);
+//        sql.append("select * from article left outer join colunm on (article.columnId=colunm.id) left outer join file" +
+//                " on(article.id=file.id) where article.id=" + resourceId);
+//        sql.append("select * from article where id=" + resourceId);
+        sql.append("SELECT\n" +
+                "\t*\n" +
+                "FROM\n" +
+                "\tarticle\n" +
+                "LEFT OUTER JOIN file ON (article.id = file.articleId),\n" +
+                " colunm\n" +
+                "WHERE\n" +
+                "\tarticle.columnId = colunm.id\n" +
+                "AND article.id = " + resourceId);
 
+        System.out.println("content id:" + sql);
         return sql.toString();
     }
 

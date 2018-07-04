@@ -4,19 +4,19 @@
  * @project_name: generalcourse
  * @author 江礼军
  * @email: 2669981991@qq.com
- * @description: 留言管理
+ * @description: 栏目管理
  **/
 
 /**
- * 留言模块管理
+ * 栏目模块管理
  * @param moduleId
  */
-function messageClick(moduleId) {
+function columnClick(moduleId) {
     console.log("moduleId:", moduleId);
 
     $('#content-main').empty();
     var head = document.createElement("h1");
-    head.innerText = "留言管理";
+    head.innerText = "栏目管理";
     document.getElementById('content-main').appendChild(head);
     $('#content-main').append("<div id=\"form-info\" class=\"row\"></div>\n" +
         "            <!-- 展示具体表格 -->\n" +
@@ -24,43 +24,40 @@ function messageClick(moduleId) {
         "                <table id=\"table\"></table>\n" +
         "            </div>");
 
-    addManageTable({})
-    addPaginationMessage();
+    addColumnTable({})
+    addPaginationColumn();
 }
 
 /**
  * 添加表格 table
  * @param columnData
  */
-function addManageTable(columnData) {
+function addColumnTable(columnData) {
     // $('#table').empty();
     $('#table').bootstrapTable({
-        url: '/getMessages',
+        url: '/getColumns?level=1',
         columns: [{
-            field: 'messageId',
-            title: '留言id'
+            field: 'columnId',
+            title: '栏目id'
         }, {
-            field: 'content',
-            title: '留言内容'
+            field: 'columnName',
+            title: '栏目名称'
         }, {
-            field: 'createTime',
-            title: '留言时间'
+            field: 'level',
+            title: '栏目级别'
         },{
-            field: 'reply',
-            title: '回复内容'
-        },{
-            field: 'replyTime',
-            title: '回复时间'
+            field: 'parentId',
+            title: '父栏目'
         },
             {
                 title: '操作',
                 formatter: function (value, row, index) {
                     console.log("row", row)
-                    var b = "<span  data-toggle=\"modal\" onclick='replyMessage("+JSON.stringify(row)+")' data-target=\"#myModal\">\n" +
-                        "\t回复\n" +
+                    var b = "<span  data-toggle=\"modal\" onclick='changeColumn("+JSON.stringify(row)+")' data-target=\"#myModal\">\n" +
+                        "\t修改\n" +
                         "</span>";
                     var c = '<span  class = "toWhite" \
-                        onclick = "readyToDeleteMessage('+row.messageId+')"> 删除</span>';
+                        onclick = "readyToDeleteColumn('+row.columnId+')"> 删除</span>';
                     return b+c;
                 }
             }
@@ -99,48 +96,63 @@ function addManageTable(columnData) {
 }
 
 
-function replyMessage(row) {
+function changeColumn(row) {
     console.log("employee row:", row)
     var form = document.createElement("form");
     // $('#myModalLabel').empty();
-    $('#myModalLabelTitle').text("回复留言");
+    $('#myModalLabelTitle').text("修改栏目");
 
     var modal_body = document.getElementById('modal-body');
     $('#modal-body').empty();
 
-    // 留言
-    var div_for_show_content= document.createElement("div");
-    div_for_show_content.setAttribute('class', 'form-group');
-    var label_for_show_content= document.createElement("label");
-    label_for_show_content.innerText = "留言内容";
-    var show_for_show_content= document.createElement("textarea");
-    // show_for_show_content.setAttribute('type', 'textAres');
-    show_for_show_content.setAttribute('class', 'form-control');
-    show_for_show_content.setAttribute('id', 'message_show_content_id');
-    show_for_show_content.setAttribute('disabled', 'true');
-    show_for_show_content.style = "height: 200px;"
-    div_for_show_content.appendChild(label_for_show_content);
-    div_for_show_content.appendChild(show_for_show_content);
-    form.appendChild(div_for_show_content);
-    // $('#message_show_name').val(row.employeeName+"");
-    show_for_show_content.value = row.content;
+    // 修改
+    var div_for_show_changeColumn = document.createElement("div");
+    div_for_show_changeColumn.setAttribute('class', 'form-group');
+    var label_for_show_changeColumn = document.createElement("label");
+    label_for_show_changeColumn.setAttribute('for', 'resourceId');
+    label_for_show_changeColumn.innerText = "栏目名称";
+    var show_for_show_changeColumn = document.createElement("input");
+    show_for_show_changeColumn.setAttribute('type', 'text');
+    show_for_show_changeColumn.setAttribute('class', 'form-control');
+    // show_for_show_title.setAttribute('disabled', 'true');
+    show_for_show_changeColumn.setAttribute('id', 'message_show_title_id');
+    div_for_show_changeColumn.appendChild(label_for_show_changeColumn);
+    div_for_show_changeColumn.appendChild(show_for_show_changeColumn);
+    form.appendChild(div_for_show_changeColumn);
+    show_for_show_changeColumn.value = row.columnName;
 
-    // 回复留言
-    var div_for_show_reply= document.createElement("div");
-    div_for_show_reply.setAttribute('class', 'form-group');
-    var label_for_show_reply= document.createElement("label");
-    label_for_show_reply.innerText = "回复留言";
-    var show_for_show_reply= document.createElement("textarea");
-    // show_for_show_content.setAttribute('type', 'textAres');
-    show_for_show_reply.setAttribute('class', 'form-control');
-    show_for_show_reply.setAttribute('id', 'message_show_reply_id');
-    show_for_show_reply.style = "height: 200px;"
-    div_for_show_reply.appendChild(label_for_show_reply);
-    div_for_show_reply.appendChild(show_for_show_reply);
-    form.appendChild(div_for_show_reply);
-    // $('#message_show_name').val(row.employeeName+"");
+    //父栏目ID
+    var div_for_show_parentId= document.createElement("div");
+    div_for_show_parentId.setAttribute('class', 'form-group');
+    var label_for_show_parentId= document.createElement("label");
+    label_for_show_parentId.innerText = "父栏目Id";
+    var  select_column = document.createElement("select");
+    select_column.setAttribute('id', "add_column_select_id")
+    select_column.style = "width: 568px;\n" +
+        "    height: 38px;    border: 1px solid #ccc;\n" +
+        "    border-radius: 4px;";
+    $.ajax({
+        url: '/getColumns',
+        method: 'post',
+        success: function (data) {
+            data = JSON.parse(data);
+            for (var i = 0; i < data.length; i++) {
+                var option_column = document.createElement("option");
+                option_column.setAttribute('value', data[i].columnId);
+                option_column.innerText = data[i].parentId;
+                if(data[i].columnId == rowId.columnId) {
+                    option_column.setAttribute('selected', 'selected');
+                }
+                select_column.appendChild(option_column);
+            }
+        }
+    })
+    div_for_show_parentId.appendChild(label_for_show_parentId);
+    div_for_show_parentId.appendChild(document.createElement("br"));
+    div_for_show_parentId.appendChild(select_column);
+    form.appendChild(div_for_show_parentId);
 
-    form.appendChild(div_for_show_reply);
+
     modal_body.appendChild(form);
 
     // 确认修改

@@ -60,6 +60,10 @@ body{
     height: 100%;
     float: right;
 
+<<<<<<< HEAD
+=======
+    background-color: #F3F3F3;
+>>>>>>> c63b2d2ae6b68c12e13db991c17e5b5ffaa9a670
 }
 
 .nav-nav p{
@@ -84,12 +88,12 @@ body{
     float: right;
 }
 #left-column {
-    width: 20%;
-    float: left;
+    /*width: 20%;*/
+    /*float: left;*/
 }
 #form-info {
     width: 80%;
-    margin-top: 40px;
+    margin-top: -10px;
     margin-bottom: 10px;
     float: right;
 }

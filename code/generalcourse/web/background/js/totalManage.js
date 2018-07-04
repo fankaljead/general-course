@@ -15,12 +15,17 @@
 function moduleClick(module) {
     console.log("moduleId:", module)
     switch (module.subModuleId) {
+        case 100000:
+            messageClick(100000);
+            break;
         case 100001:
             messageModuleClick(100001);
             break;
-
-        case 100000:
-            messageClick(100000);
+        case 100003:
+            columnClick(100003);
+            break;
+        case 100006:
+            employeeModuleClick(100006);
             break;
     }
 }

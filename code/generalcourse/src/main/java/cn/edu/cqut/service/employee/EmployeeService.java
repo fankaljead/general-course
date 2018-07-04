@@ -147,4 +147,12 @@ public class EmployeeService implements IEmployeeService{
 
         return employees;
     }
+
+    public Integer updateEmployee(Employee employee) {
+        return BaseDao.update(employee);
+    }
+
+    public Integer deleteByEmployeeId(Integer employeeId) {
+        return BaseDao.deleteById(employeeId, Employee.class);
+    }
 }

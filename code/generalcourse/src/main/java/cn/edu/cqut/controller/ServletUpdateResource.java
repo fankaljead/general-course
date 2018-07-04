@@ -48,9 +48,9 @@ public class ServletUpdateResource extends HttpServlet {
         switch (type) {
             case 0:// 修改
 
-                String columnIdString = request.getParameter("columnIdString");
+                String columnIdString = request.getParameter("columnId");
                 Integer columnId = 0;
-                String whetherTopString = request.getParameter("whetherTopString");
+                String whetherTopString = request.getParameter("whetherTop");
                 Integer whetherTop = 0;
                 String title = request.getParameter("title");
                 String content = request.getParameter("content");
