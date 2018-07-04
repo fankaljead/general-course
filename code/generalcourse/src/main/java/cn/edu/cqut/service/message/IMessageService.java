@@ -3,6 +3,8 @@ package cn.edu.cqut.service.message;
 import cn.edu.cqut.pojo.Message;
 import com.alibaba.fastjson.JSONArray;
 
+import java.util.List;
+
 /**
  * @author 周翔辉
  * @create: 2018年06月29日
@@ -33,7 +35,7 @@ public interface IMessageService {
      * @param array
      * @return
      */
-    public Integer deleteMessages(JSONArray array);
+    public Integer deleteMessages(List<Integer> messageIds);
 
     /**
      * 回复留言
