@@ -40,6 +40,7 @@ public class ServletUpdateEmployee extends HttpServlet {
         Employee employee = new Employee();
         employee.setName(employeeName);
         employee.setId(employeeId);
+        employee.setSex(sex);
 
         PrintWriter out = response.getWriter();
 

@@ -1,6 +1,7 @@
 package cn.edu.cqut.service.module;
 
 import cn.edu.cqut.dao.BaseDao;
+import cn.edu.cqut.dao.EntityDao;
 import cn.edu.cqut.dao.ModuleDao;
 import cn.edu.cqut.pojo.SubModule;
 import cn.edu.cqut.util.DBUtil;
@@ -10,6 +11,8 @@ import com.alibaba.fastjson.JSONObject;
 import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author 周翔辉
@@ -36,5 +39,37 @@ public class ModuleService implements IModuleService{
      */
     public Integer updateModule(SubModule subModule) {
         return BaseDao.update(subModule);
+    }
+
+    /**
+     * 获取所有子模块
+     * @return
+     */
+    public List<SubModule> getAllSubmodules() {
+        List<SubModule> subModules = new ArrayList<SubModule>();
+
+        String sql = dao.getAllSubmodules();
+
+        try {
+            ResultSet set = DBUtil.query(sql);
+
+            while (set.next()) {
+                SubModule subModule = new SubModule();
+                subModule.setId(set.getInt("id"));
+                subModule.setParentId(set.getInt("parentModuleId"));
+                subModule.setName(set.getString("name"));
+                subModule.setStatus(set.getInt("status"));
+
+                subModules.add(subModule);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        return subModules;
     }
 }

@@ -35,6 +35,8 @@
             <div class="key">
                 <input type="password" value="password" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'password';}" id="form-password">
             </div>
+            <div id="v_container" style="width: 200px;height: 50px;"></div>
+            <input type="text" id="code_input" value="" placeholder="请输入验证码"/>
         </form>
         <div class="signin">
             <input type="button" value="登录" onclick="loginClick()" >
@@ -45,6 +47,7 @@
     <script src="../lib/js/jquery.cookie.js"></script>
     <script src="../lib/js/sweetalert2.all.js"></script>
     <script src="../lib/js/md5.js"></script>
+    <script src="../lib/js/gVerify.js"></script>
     <script src="js/index.js"></script>
 
 </body>

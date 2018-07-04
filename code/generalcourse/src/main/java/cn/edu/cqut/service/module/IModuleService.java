@@ -4,6 +4,8 @@ import cn.edu.cqut.pojo.Module;
 import cn.edu.cqut.pojo.SubModule;
 import com.alibaba.fastjson.JSONArray;
 
+import java.util.List;
+
 /**
  * @author 周翔辉
  * @create: 2018年06月29日
@@ -27,4 +29,10 @@ public interface IModuleService {
      * @return Result.SUCCESS 成功 Result.FAILED 失败
      */
     public Integer updateModule(SubModule subModule);
+
+    /**
+     * 获取所有模块
+     * @return
+     */
+    public List<SubModule> getAllSubmodules();
 }

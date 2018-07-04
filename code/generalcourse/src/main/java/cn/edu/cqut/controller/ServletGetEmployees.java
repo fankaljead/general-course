@@ -57,22 +57,9 @@ public class ServletGetEmployees extends HttpServlet {
             pageSize = Integer.parseInt(pageSizeString);
         }
 
-
         PrintWriter out = response.getWriter();
 
-        List<Employee> employees = service.getEmployees(roleId, pageIndex, pageSize, condition);
-
-        JSONArray array = new JSONArray();
-
-        for (Employee employee : employees) {
-            JSONObject object = new JSONObject();
-            object.put("roleId", employee.getRoleId());
-            object.put("employeeName", employee.getName());
-            object.put("account", employee.getAccount());
-            object.put("sex", employee.getSex());
-
-            array.add(object);
-        }
+        JSONArray array = new JSONArray(service.getEmployees(roleId, pageIndex, pageSize, condition));
 
         out.println(array);
 

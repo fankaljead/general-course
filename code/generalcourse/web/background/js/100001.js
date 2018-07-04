@@ -237,7 +237,7 @@ function createMessageForm(column) {
     input_for_input_add.setAttribute('value', '新增');
     input_for_input_add.setAttribute('class', 'form-control');
     input_for_input_add.setAttribute('id', 'message_input_add_id');
-    div_for_input_add.style = "backgroud: #2AABD2;"
+    div_for_input_add.style = "backgroud: #2AABD2;margin-top: 25px;"
     div_for_input_add.appendChild(input_for_input_add);
     form.appendChild(div_for_input_add);
     input_for_input_add.addEventListener('click', function (ev) {
@@ -423,20 +423,18 @@ function showDetail(rowId) {
     var div_for_show_file= document.createElement("div");
     div_for_show_file.setAttribute('class', 'form-group');
     var label_for_show_file= document.createElement("label");
+
     label_for_show_file.innerText = "文件";
     var file_a = document.createElement("a");
+    file_a.setAttribute("size", '100');
+
+
+    div_for_show_file.style = "display: none";
+
+    div_for_show_file.appendChild(label_for_show_file);
     div_for_show_file.appendChild(document.createElement("br"));
     div_for_show_file.appendChild(file_a);
-    div_for_show_file.style = "display: none";
-    // var show_for_show_file= document.createElement("input");
-    // show_for_show_file.setAttribute('type', 'text');
-    // show_for_show_file.setAttribute('disabled', 'true');
-    // show_for_show_file.setAttribute('class', 'form-control');
-    // show_for_show_file.setAttribute('id', 'message_show_file_id');
-    div_for_show_file.appendChild(label_for_show_file);
-    // div_for_show_file.appendChild(show_for_show_file);
     // 判断是否有文件
-    // form.appendChild(div_for_show_columnName);
     form.appendChild(div_for_show_file);
 
     // 内容
@@ -448,7 +446,7 @@ function showDetail(rowId) {
     // show_for_show_content.setAttribute('type', 'textAres');
     show_for_show_content.setAttribute('disabled', 'true');
     show_for_show_content.setAttribute('class', 'form-control');
-    show_for_show_content.style = "height: 140px";
+    show_for_show_content.style = "height: 120px";
     show_for_show_content.setAttribute('id', 'message_show_content_id');
     div_for_show_content.appendChild(label_for_show_content);
     div_for_show_content.appendChild(show_for_show_content);
@@ -528,6 +526,8 @@ function readyToDelete(rowId, columnData) {
  */
 function addResource(ev, column) {
     var form = document.createElement("form");
+    // form.setAttribute('id', 'uploadForm');
+    // form.setAttribute('enctype', 'multipart/form-data');
     // $('#myModalLabel').empty();
     $('#myModalLabelTitle').text("新增文章");
 
@@ -609,6 +609,20 @@ function addResource(ev, column) {
     // show_for_show_columnName.setAttribute('class', 'form-control');
     // show_for_show_columnName.setAttribute('id', 'message_show_columnName_id');
 
+    // 文件
+    var div_for_show_file = document.createElement("div");
+    div_for_show_file.setAttribute('class', 'form-group');
+    var label_for_show_file = document.createElement("label");
+    label_for_show_file.setAttribute('for', 'resourceId');
+    label_for_show_file.innerText = "文件";
+    var show_for_show_file = document.createElement("input");
+    show_for_show_file.setAttribute('type', 'file');
+    show_for_show_file.setAttribute('class', 'form-control');
+    show_for_show_file.setAttribute('id', 'message_show_file_id');
+    div_for_show_file.appendChild(label_for_show_file);
+    div_for_show_file.appendChild(show_for_show_file);
+    form.appendChild(div_for_show_file);
+
 
     // 内容
     var div_for_show_content= document.createElement("div");
@@ -638,17 +652,54 @@ function addResource(ev, column) {
             method: 'post',
             success: function (data) {
                 if (data == 1) {
-                    alert("新增成功！");
+                    // alert("新增成功！");
+                    sweetAlert(
+                        "新增成功"
+                    );
                     var opt = {
                         url: '/getResources',
                         silent: true,
                     };
                     $('#table').bootstrapTable('refresh',opt);
                 } else {
-                    alert("新增失败");
+                    // alert("新增失败");
+                    sweetAlert(
+                        "新增失败"
+                    );
                 }
             }
         })
+        setTimeout(function () {
+            var filename = $("#message_show_file_id").val();
+            $.ajax({
+                url:'/uploadFile',
+                type: 'POST',
+                cache: false,
+                enctype: 'multipart/form-data',
+                data: {
+                    file: filename
+                },
+                beforeSend: function(){
+                    uploading = true;
+                },
+            }).success(function (data) {
+                if (data == 1)  {
+                    sweetAlert(
+                        "文件上传成功"
+                    );
+                } else {
+                    sweetAlert(
+                        "上传失败"
+                    );
+                }
+            }).error(function () {
+                sweetAlert(
+                    "上传失败"
+                );
+            });
+        }, 1000)
+
+
     }
 }
 
