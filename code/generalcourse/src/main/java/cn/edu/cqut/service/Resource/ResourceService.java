@@ -117,13 +117,14 @@ public class ResourceService implements IResourceService{
             if (resultSet.next()) {
                 object.put("resourceId", resultSet.getInt("article.id"));
                 object.put("content", resultSet.getString("content"));
-//                object.put("path", resultSet.getString("path"));
+                object.put("fileName", resultSet.getString("file.name"));
+                object.put("fileId", resultSet.getInt("file.id"));
                 object.put("title", resultSet.getString("title"));
                 object.put("createTime", resultSet.getString("createTime"));
                 object.put("whetherTop", resultSet.getInt("whetherTop"));
                 object.put("status", resultSet.getInt("status"));
                 object.put("columnId", resultSet.getInt("columnId"));
-                object.put("columnName", resultSet.getString("name"));
+                object.put("columnName", resultSet.getString("colunm.name"));
 
 
                 return object;

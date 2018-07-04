@@ -8,6 +8,8 @@ import cn.edu.cqut.pojo.Permission;
 import cn.edu.cqut.pojo.Role;
 import cn.edu.cqut.util.DBUtil;
 import cn.edu.cqut.util.Result;
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
 
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
@@ -189,6 +191,35 @@ public class RoleService implements IRoleService{
         }
 
         return isSuccess;
+    }
+
+    /**
+     * 通过roleId获取权限信息
+     * @param roleId
+     * @return
+     */
+    public JSONArray getPermissionsByRoleId(Integer roleId) {
+        JSONArray array = new JSONArray();
+        try {
+            ResultSet set = DBUtil.query(dao.getPermissionsByRoleId(roleId));
+
+            while (set.next()) {
+                JSONObject object = new JSONObject();
+                object.put("moduleId", set.getInt("permission.moduleId"));
+                object.put("moduleName", set.getString("submodule.name"));
+                object.put("permissionId", set.getInt("permission.id"));
+                object.put("roleName", set.getString("role.name"));
+
+                array.add(object);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        return array;
     }
 
     /**
