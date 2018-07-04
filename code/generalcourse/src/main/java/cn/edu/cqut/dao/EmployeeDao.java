@@ -60,7 +60,11 @@ public class EmployeeDao {
     public String getEmployees(Integer roleId, Integer pageIndex, Integer pageSize, String condition) {
         StringBuffer sql = new StringBuffer();
 
-        sql.append("select * from employee ");
+        sql.append("SELECT\n" +
+                "\t*\n" +
+                "FROM\n" +
+                "\temployee LEFT OUTER JOIN\n" +
+                "\trole on(employee.roleId=role.id) ");
 
         // 判断roleId条件是否有and
         boolean haveAnd = false;
@@ -68,7 +72,7 @@ public class EmployeeDao {
         // 搜索条件不为空时加入like子句
         if (!(condition == null || condition.equals("") || condition.equals("undefined"))) {
             haveAnd = true;
-            sql.append(" where employee.id like '%" + condition + "%' ");
+            sql.append(" employee.id like '%" + condition + "%' ");
             sql.append(" or employee.name like '%" + condition + "%' ");
             sql.append(" or employee.sex like '%" + condition + "%' ");
             sql.append(" or employee.account like '%" + condition + "%' ");
@@ -98,6 +102,7 @@ public class EmployeeDao {
         Integer start = (pageIndex - 1) * pageSize;
         sql.append(" limit " + start + "," + pageSize);
 
+        System.out.println("get employee:" + sql);
         return sql.toString();
     }
 }

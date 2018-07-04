@@ -17,6 +17,18 @@
     **使用**
     - 进入首页直接请level为0的栏目
     - 点击某个栏目传level为1和点击栏目的id
+	
+1. getSecondColumns 已完成
+
+	**前台参数**
+	- 无
+	
+	**后台返回**
+	- columnId: 栏目id,
+	- columnName: 栏目名称,
+	- parentId: 父栏目id,
+	- parentName: 父栏目名称
+	
 
 2. getResources 获取资源 包括文章和文件等资源(**后台管理也可以使用**) 已完成
 
@@ -374,10 +386,10 @@
     - roleId: (0 只有角色id为0的才是没有被分配角色的， 可选)
     - pageIndex: 当前页 (可选)
     - pageSize: 页面大小 (可选)
-    - condition: 查询条件 (可选)
+    - condition: 查询条件 (可选)	
 
     **后台返回JSON数组**
-    - employeeId: 人员id
+    - roleId: 角色id
     - employeeName: 人员名称
     - sex: 人员性别
     - account: 人员的账号

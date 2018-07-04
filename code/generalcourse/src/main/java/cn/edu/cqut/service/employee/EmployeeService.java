@@ -121,21 +121,22 @@ public class EmployeeService implements IEmployeeService{
      * @param condition 条件
      * @return
      */
-    public List<Employee> getEmployees(Integer roleId, Integer pageIndex, Integer pageSize, String condition) {
-        List<Employee> employees = new ArrayList<Employee>();
+    public JSONArray getEmployees(Integer roleId, Integer pageIndex, Integer pageSize, String condition) {
+        JSONArray array = new JSONArray();
 
         try {
             ResultSet set = DBUtil.query(employeeDao.getEmployees(roleId, pageIndex, pageSize, condition));
 
             while (set.next()) {
-                Employee employee = new Employee();
-                employee.setId(set.getInt("id"));
-                employee.setSex(set.getInt("sex"));
-                employee.setRoleId(set.getInt("roleId"));
-                employee.setName(set.getString("name"));
-                employee.setAccount(set.getInt("account"));
+                JSONObject object = new JSONObject();
+                object.put("roleId", set.getInt("role.id"));
+                object.put("roleName", set.getString("role.name"));
+                object.put("accout", set.getInt("employee.account"));
+                object.put("employeeName", set.getString("employee.name"));
+                object.put("sex", set.getInt("sex"));
 
-                employees.add(employee);
+
+                array.add(object);
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -145,7 +146,7 @@ public class EmployeeService implements IEmployeeService{
             e.printStackTrace();
         }
 
-        return employees;
+        return array;
     }
 
     public Integer updateEmployee(Employee employee) {
