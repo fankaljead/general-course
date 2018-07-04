@@ -39,6 +39,8 @@ public class ServletDownloadFile extends HttpServlet {
         java.io.File downloadFile = new java.io.File(filePath);
         FileInputStream inStream = new FileInputStream(downloadFile);
 
+        System.out.println("filePath:" + filePath);
+
         // 使用相对路径
         String relativePath = getServletContext().getRealPath("");
 

@@ -18,7 +18,15 @@ function moduleClick(module) {
         case 100001:
             messageModuleClick(100001);
             break;
-
+        case 100004:
+            moduleManage(100004);
+            break;
+        case 100005:
+            roleDistribute(100005);
+            break;
+        case 100006:
+            employeeModuleClick(100006);
+            break;
         case 100007:
             roleManagement(100007);
             break;

@@ -1,10 +1,10 @@
-function roleManagement(moduleId) {
-     var main = $("#content-main");
+function roleDistribute(moduleId) {
+    var main = $("#content-main");
 
     //初始化content-main
     main.empty();
 
-    var h1 = $("<h1>角色管理</h1>");
+    var h1 = $("<h1>角色分配</h1>");
     h1.appendTo(main);
 
     $('#content-main').append("<div id=\"form-info\" class=\"row\"></div>\n" +
@@ -46,7 +46,7 @@ function addRoleManageTable(columnData) {
                         "\t编辑\n" +
                         "</span>";
                     var c = '<span  class = "toWhite" \
-                        onclick = "readyToDeleteRole('+row.roleId+')"> 删除</span>';
+                        onclick = "readyToDeleteEmployee('+row.account+')"> 删除</span>';
                     return b+c;
                 }
             }
@@ -156,7 +156,7 @@ function readyToEditRole(row) {
                 if (data == 1) {
                     alert("修改成功！");
                     var opt = {
-                        url: '/getRoles',
+                        url: '/getEmployees',
                         silent: true,
                     };
                     $('#table').bootstrapTable('refresh',opt);
@@ -168,7 +168,7 @@ function readyToEditRole(row) {
     }
 }
 
-function readyToDeleteRole(row) {
+function readyToDeleteEmployee(row) {
     swal({
         title: "您确定要删除吗？",
         text: "您确定要删除这条数据？",
@@ -180,16 +180,14 @@ function readyToDeleteRole(row) {
         confirmButtonColor: "#ec6c62"
     }, function () {
         var ids = [];
-        var m = '['+row+']';
 
         $.ajax({
-
-            url: '/deleteRoles?roleIds='+m,
+            url: '/deleteRoles?roleIds='+row,
             method: 'post',
             success: function (data) {
                 if (data == 1) {
                     var opt = {
-                        url: '/getRoles',
+                        url: '/getEmployees',
                         silent: true,
                     };
                     $('#table').bootstrapTable('refresh',opt);
@@ -228,7 +226,7 @@ function createRoleForm(column) {
 }
 
 /**
- * 新增角色
+ * 新增人员
  * @param ev
  */
 function addRole(ev, column) {
@@ -287,7 +285,6 @@ function addRole(ev, column) {
                 for (var j = 0; j < data[i].subModules.length; j++) {
                     var input = document.createElement("input");
                     input.setAttribute("type", "checkbox");
-                    input.setAttribute('name', 'roleAddCheck');
                     input.setAttribute("value",""+data[i].subModules[j].subModuleId);
                     div_checkbox.appendChild(input);
                     div_checkbox.append(data[i].subModules[j].subModuleName);
@@ -300,35 +297,33 @@ function addRole(ev, column) {
     })
     form.appendChild(div_for_show_ownModuleIds);
 
+    var arr = new Array();
+    $("#div_checkbox_id :checkbox:checked").each(function(i){
+        arr[i] = $(this).val();
+        alert($(this).val());
+    });
+    var vals = arr.join(",");
+    console.log(vals);
+
     modal_body.appendChild(form);
 
     // 确认修改
     var modal_submit_id = document.getElementById('modal_submit_id');
 
     modal_submit_id.onclick = function (ev1) {
-        var obj = document.getElementsByName("roleAddCheck");
-        var check_val = [];
-        for(k in obj){
-            if(obj[k].checked)
-                check_val.push(obj[k].value);
-        }
-        var m = '['+check_val.toString()+']'
         //创建时间
         var createTime = CurrentTime();
         $.ajax({
-            url: '/addRole?roleName='+$('#message_show_name_id').val() +
+            url: '/addRole ?roleName='+$('#message_show_name_id').val() +
             "&createTime="+createTime
             +"&description="+$('#message_show_description_id').val()
-            +"&ownModuleIds="+m,
+            +"&ownModuleIds="+vals,
             method: 'post',
             success: function (data) {
                 if (data != 0) {
-                    // alert("新增成功")
-                    sweetAlert(
-                        '新增成功'
-                    );
+                    alert("新增成功")
                     var opt = {
-                        url: '/getRoles',
+                        url: '/addRole',
                         silent: true,
                     };
                     $('#table').bootstrapTable('refresh',opt);

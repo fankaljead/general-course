@@ -63,16 +63,6 @@ $(document).ready(function () {
 
                     li.setAttribute('onclick', 'moduleClick('+JSON.stringify(subModule) +')')
                     ul.appendChild(li);
-                    // li.onclick = function (ev) {
-                    //     return moduleClick(subModuleId, this);
-                    // }
-                    // (function(li){
-                    //     // document.getElementById('subModuleLi'+data[i].subModules[j].subModuleId)
-                    //     li.addEventListener('click', function () {
-                    //         moduleClick(subModuleId, this);
-                    //     }, false);
-                    //
-                    // })(i)
 
                 }
 

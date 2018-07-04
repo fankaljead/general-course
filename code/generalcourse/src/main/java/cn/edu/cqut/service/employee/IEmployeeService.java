@@ -46,4 +46,20 @@ public interface IEmployeeService {
      * @return employee数组
      */
     public List<Employee> getEmployees(Integer roleId, Integer pageIndex, Integer pageSize, String condition);
+
+
+    /**
+     * 更新人员信息
+     * @param employee
+     * @return
+     */
+    public Integer updateEmployee(Employee employee);
+
+    /**
+     * 删除人员
+     * @param employeeId
+     * @return
+     */
+    public Integer deleteByEmployeeId(Integer employeeId);
+
 }

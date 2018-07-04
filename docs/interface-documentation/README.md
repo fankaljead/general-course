@@ -315,6 +315,25 @@
     **后台返回int**
     - result: 成功返回账号，失败0
 
+	
+1. employeeEmployee 更新用户 已完成
+
+    **前台参数**
+    - employeeName: 用户名字
+    - sex: 用户性别
+    - employeeId: 用户id
+
+    **后台返回int**
+    - result: 成功返回账号，失败0
+	
+1. deleteByEmployeeId 更新用户 已完成
+
+    **前台参数**
+    - employeeId: 用户id
+
+    **后台返回int**
+    - result: 成功返回账号，失败0
+
 2. deleteEmployees 删除用户 已完成
 
     **前台参数**
