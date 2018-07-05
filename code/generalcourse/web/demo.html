@@ -1,0 +1,49 @@
+<!--
+    @create: 2018年06月30日 
+    @time: 22:48          
+    @project_name: generalcourse
+    @author 周翔辉 
+    @email: 728678732@qq.com  
+    @description: 前台传json值样例
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <h1 style="text-align: center">前台传json值样例</h1>
+
+    <button onclick="deleteMessages()">传json值给后台</button>
+    <script src="lib/js/jquery.js" ></script>
+
+    <script>
+        function deleteMessages() {
+            console.log("deleteMessages")
+            $.ajax({
+                url: "/deleteMessages",// 请求后台方法名称
+                method: "post",// 请求类型
+                data: {// 要传给后台的json数据
+                    messageIds:
+                        JSON.stringify([// 将javascript对象转化为json对象
+                        {
+                            messageId: 100000
+                        },
+                        // {
+                        //     messageId: 100001
+                        // }
+                    ]),
+                },
+                dataType: "json",// 数据格式为json
+                success: function (data) {// 后台返回值 1 为删除成功 0 为删除失败
+                    console.log("data:",data)
+                }
+                error: function () {// 执行方法出错 执行
+
+                }
+            })
+        }
+    </script>
+</body>
+</html>

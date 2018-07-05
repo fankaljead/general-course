@@ -1,6 +1,8 @@
 package cn.edu.cqut.service.role;
 
+import cn.edu.cqut.pojo.Employee;
 import cn.edu.cqut.pojo.Role;
+import com.alibaba.fastjson.JSONArray;
 
 import java.util.List;
 
@@ -25,4 +27,48 @@ public interface IRoleService {
      * @return
      */
     public Role getRoleByAccount(Integer account);
+
+    /**
+     * 给用户分配角色
+     * @param employee
+     * @return
+     */
+    public Integer assignRole(Employee employee);
+
+    /**
+     * 新增角色
+     * @param role
+     * @param ownModuleIds
+     * @return
+     */
+    public Integer addRole(Role role, List<Integer> ownModuleIds);
+
+    /**
+     * 修改角色
+     * @param role
+     * @param ownModuleIds
+     * @return
+     */
+    public Integer updateRole(Role role, List<Integer> ownModuleIds);
+
+    /**
+     * 删除角色
+     * @param roleIds
+     * @return
+     */
+    public Integer deleteRoles(List<Integer> roleIds);
+
+
+    /**
+     * 获取角色权限
+     * @param roleId
+     * @return [
+     * 			{
+     * 				moduleId: 板块id(subModule表)一个对应权限,
+     * 				moduleName: 模块名称,
+     * 				permissionId: 权限id,
+     * 			} ...
+     * 		]
+     */
+    public JSONArray getPermissionsByRoleId(Integer roleId);
 }

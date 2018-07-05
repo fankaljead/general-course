@@ -1,7 +1,18 @@
 package cn.edu.cqut.service.colunm;
 
+import cn.edu.cqut.dao.BaseDao;
 import cn.edu.cqut.dao.ColunmDao;
+import cn.edu.cqut.dao.EntityDao;
+import cn.edu.cqut.pojo.Colunm;
+import cn.edu.cqut.util.DBUtil;
+import cn.edu.cqut.util.Result;
 import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
+
+import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 /**
  * @author 周翔辉
@@ -26,5 +37,46 @@ public class ColunmService implements IColunmService{
         JSONArray objects = dao.getColunm(level, colunmId);
 
         return objects;
+    }
+
+    /**
+     * 更新栏目
+     * @param colunm
+     * @return
+     */
+    public Integer updateColunm(Colunm colunm) {
+        return BaseDao.update(colunm);
+    }
+
+    /**
+     * 获取所有二级栏目
+     * @return
+     */
+    public JSONArray getSecondColumns() {
+
+        JSONArray array = new JSONArray();
+
+        try {
+            ResultSet set = DBUtil.query(dao.getSecondColumns());
+
+            while (set.next()) {
+                JSONObject object = new JSONObject();
+
+                object.put("columnId", set.getInt("colunm.id"));
+                object.put("columnName", set.getString("colunm.name"));
+                object.put("parentId", set.getInt("parent.id"));
+                object.put("parentName", set.getString("parent.name"));
+
+                array.add(object);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        return array;
     }
 }

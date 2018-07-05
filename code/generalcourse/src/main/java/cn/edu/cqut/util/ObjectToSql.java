@@ -110,6 +110,7 @@ public class ObjectToSql {
         Field[] fields = clazz.getDeclaredFields();
         for (int i = 0; i < fields.length; i++) {
             fields[i].setAccessible(true);
+            Column column = fields[i].getAnnotation(Column.class);
             if (fields[i].toGenericString().contains("static")) {
                 continue;
             }
@@ -118,10 +119,10 @@ public class ObjectToSql {
                 continue;
             }
             if (o1 instanceof  String ){
-                sql.append(fields[i].getName() + "='" + o1.toString() +"', ");
+                sql.append(column.name() + "='" + o1.toString() +"', ");
             }
             else {
-                sql.append(fields[i].getName() + "=" + o1.toString() + ", ");
+                sql.append(column.name() + "=" + o1.toString() + ", ");
             }
         }
         sql.deleteCharAt(sql.length() - 2);
@@ -226,7 +227,7 @@ public class ObjectToSql {
             Column column = field.getAnnotation(Column.class);
             boolean isId = column.isId();
             if (isId) {
-                 sql.append(field.getName() + ") as id from " + clazz.getSimpleName());
+                 sql.append(field.getName() + ") as id from " + clazz.getSimpleName().toLowerCase());
                  break;
             } else {
                 continue;

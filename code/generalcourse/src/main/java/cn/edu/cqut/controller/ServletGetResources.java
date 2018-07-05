@@ -31,6 +31,9 @@ public class ServletGetResources extends HttpServlet {
         Integer pageIndex = 0;
         Integer pageSize = 0;
 
+        System.out.println("start time:" + startTime);
+        System.out.println("end time:" + endTime);
+
         // 判断前台传的值是否为空
         if (!(columnIdString == null || columnIdString.equals("") || columnIdString.equals("undefined"))) {
             columnId = Integer.parseInt(columnIdString);

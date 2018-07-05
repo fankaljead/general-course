@@ -6,9 +6,11 @@ import cn.edu.cqut.pojo.Entity;
 import cn.edu.cqut.util.Column;
 import cn.edu.cqut.util.DBUtil;
 import cn.edu.cqut.util.ObjectToSql;
+import cn.edu.cqut.util.Result;
 
 import java.io.IOException;
 import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -68,6 +70,79 @@ public class BaseDao {
         }
 
         return list;
+    }
+
+    /**
+     * 通用更新方法
+     * @param entity
+     * @return
+     */
+    public static Integer update(Entity entity) {
+        try {
+            EntityDao.update(entity);
+
+            return Result.SUCCESS;
+        } catch (NoSuchMethodException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        return Result.FAILED;
+    }
+
+    /**
+     * 新增通用方法
+     * @param entity
+     * @return
+     */
+    public static Integer save(Entity entity) {
+        try {
+            EntityDao.save(entity);
+            return Result.SUCCESS;
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        return Result.FAILED;
+    }
+
+    /**
+     * 删除通用方法
+     * @param id
+     * @param entity
+     * @return
+     */
+    public static Integer deleteById(Integer id, Class entity) {
+        try {
+            EntityDao.deleteByID(id, entity);
+
+            return Result.SUCCESS;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        return Result.FAILED;
     }
 
 }

@@ -1,6 +1,6 @@
 @charset "gb2312";
 /* ∆Û“µºÚΩÈ */
-.con_content { background: url(../images/r_line.jpg) repeat-y 190px 0 }
+.con_content { background: url(../images/r_line.jpg) repeat-y 190px 0 ;height: 500px}
 .about_box { width: 780px; float: right; margin-top: 10px }
 .about_content { line-height: 24px; font-size: 14px; padding: 20px }
 .about_content p { margin-bottom: 15px; text-indent: 2em }

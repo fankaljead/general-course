@@ -29,9 +29,16 @@ public class ColunmDao {
         StringBuffer sql = new StringBuffer();
         sql.append("select * from colunm where level=" + level);
 
-        if (colunmId != null) {
+        if (colunmId != 0) {
             sql.append(" and parentId=" + colunmId);
         }
+
+        if (level == -1 && colunmId == 0) {
+            sql = new StringBuffer();
+            sql.append("select * from colunm");
+        }
+
+        System.out.println("level sql:" + sql);
 
         try {
             ResultSet resultSet = DBUtil.query(sql.toString());
@@ -54,5 +61,24 @@ public class ColunmDao {
         }
 
         return array;
+    }
+
+    /**
+     * 获取所有二级栏目
+     * @return
+     */
+    public String getSecondColumns() {
+        StringBuffer sql = new StringBuffer();
+
+        sql.append("SELECT\n" +
+                "\t*\n" +
+                "FROM\n" +
+                "\t\n" +
+                "\tcolunm as parent,\n" +
+                "colunm\n" +
+                "WHERE\n" +
+                "\tcolunm.id = parent.parentId");
+
+        return sql.toString();
     }
 }

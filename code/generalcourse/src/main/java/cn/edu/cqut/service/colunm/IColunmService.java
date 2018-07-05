@@ -1,5 +1,6 @@
 package cn.edu.cqut.service.colunm;
 
+import cn.edu.cqut.pojo.Colunm;
 import com.alibaba.fastjson.JSONArray;
 
 /**
@@ -18,4 +19,19 @@ public interface IColunmService {
      * @return
      */
     public JSONArray getColunms(Integer level, Integer colunmId);
+
+
+    /**
+     * 更新栏目
+     * @param colunm
+     * @return Result.SUCCESS 成功 Result.FAILED 失败
+     */
+    public Integer updateColunm(Colunm colunm);
+
+
+    /**
+     * 获取所有二级栏目
+     * @return
+     */
+    public JSONArray getSecondColumns();
 }

@@ -5,7 +5,7 @@ function refreshTime() {
     $(".time").append(time);
 }
 $(function () {
-    setInterval("refreshTime()",100);
+    setInterval("refreshTime()",1000);
 })
 
 //点击侧边栏菜单显示子菜单
@@ -53,11 +53,17 @@ $(document).ready(function () {
                     p.innerText = data[i].moduleName;
 
 
+
                 for (var j = 0; j < data[i].subModules.length; j++) {
                     var li = document.createElement("li");
+                    li.setAttribute('id', "subModuleLi"+data[i].subModules[j].subModuleId)
                     li.innerText = data[i].subModules[j].subModuleName;
+                    var subModule = data[i].subModules[j];
+                    // 给每个模块添加点击事件，传染模块的id和事件ev
 
+                    li.setAttribute('onclick', 'moduleClick('+JSON.stringify(subModule) +')')
                     ul.appendChild(li);
+
                 }
 
                 var module_div = document.getElementById('module_div');
