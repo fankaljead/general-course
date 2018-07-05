@@ -471,7 +471,7 @@ function addRole(ev, column) {
                     };
                     $('#table').bootstrapTable('refresh',opt);
                 } else {
-                    alert("新增失败");
+                    sweetAlert("新增失败");
                 }
             }
         })

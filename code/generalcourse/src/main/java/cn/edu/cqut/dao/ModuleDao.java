@@ -55,7 +55,7 @@ public class ModuleDao {
                 // 查询所有的子模块
                 ResultSet subSet = DBUtil.query("select * from permission, submodule where " +
                         "permission.roleId=" + roleId +
-                        " and permission.moduleId=submodule.id and submodule.parentModuleId="+ moduleId);
+                        " and permission.moduleId=submodule.id and submodule.parentModuleId="+ moduleId+" and status=1");
 
                 while (subSet.next()) {
                     JSONObject subModule = new JSONObject();

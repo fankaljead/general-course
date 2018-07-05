@@ -36,7 +36,7 @@ body{
 
 .content{
     height: 500px;
-    background-color: #4aaf51;
+    /*background-color: #4aaf51;*/
 }
 
 .welcome{
@@ -53,18 +53,15 @@ body{
     width: 15%;
     height: 100%;
     float: left;
-    background-color: yellow;
+    background-color: #00CA79;
 }
 
 .content-main{
     width: 85%;
     height: 100%;
     float: right;
-<<<<<<< HEAD
 
     background-color: #F3F3F3;
-=======
->>>>>>> b11381169bc275fb74ce19a5c60670fe1b635cde
 }
 
 .nav-nav p{
@@ -75,7 +72,7 @@ body{
 }
 
 .nav-nav ul{
-    background-color: white;
+    background-color: #00CA79;
     display: none;
 }
 
@@ -94,11 +91,7 @@ body{
     width: 20%;
     background-color: #F3F3F3;
     float: left;
-<<<<<<< HEAD
-    /*width: 20%;*/
-    /*float: left;*/
-=======
->>>>>>> b11381169bc275fb74ce19a5c60670fe1b635cde
+
 }
 #form-info {
     width: 80%;
