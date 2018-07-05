@@ -34,6 +34,11 @@ public class ServletUpdateColunm extends HttpServlet {
             parentId = Integer.parseInt(parentIdString);
         }
 
+        // 判断前台传的值是否为空
+        if (!(columnIdString == null || columnIdString.equals("") || columnIdString.equals("undefined"))) {
+            columnId = Integer.parseInt(columnIdString);
+        }
+
         Colunm colunm = new Colunm();
         colunm.setId(columnId);
         colunm.setName(columnName);
