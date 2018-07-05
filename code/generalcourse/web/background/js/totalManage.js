@@ -21,26 +21,26 @@ function moduleClick(module) {
         case 100001:
             messageModuleClick(100001);
             break;
-<<<<<<< HEAD
+        case 100002:
+            examineClick(100002);
+            break;
         case 100003:
             columnClick(100003);
-=======
+            break;
         case 100004:
             moduleManage(100004);
             break;
         case 100005:
             roleDistribute(100005);
->>>>>>> b494b3a44e5fe9a302ad508aee8110e37aa9f836
             break;
         case 100006:
             employeeModuleClick(100006);
             break;
-<<<<<<< HEAD
-=======
+
         case 100007:
             roleManagement(100007);
             break;
->>>>>>> b494b3a44e5fe9a302ad508aee8110e37aa9f836
+
     }
 }
 

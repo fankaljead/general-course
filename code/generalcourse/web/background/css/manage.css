@@ -60,17 +60,6 @@ body{
     width: 85%;
     height: 100%;
     float: right;
-<<<<<<< HEAD
-=======
-
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-=======
->>>>>>> 35471a6802627acbdee7d0cb972d6deb29248aec
->>>>>>> b494b3a44e5fe9a302ad508aee8110e37aa9f836
-    background-color: #F3F3F3;
->>>>>>> c63b2d2ae6b68c12e13db991c17e5b5ffaa9a670
 }
 
 .nav-nav p{
@@ -97,14 +86,9 @@ body{
 }
 
 #left-column {
-<<<<<<< HEAD
     width: 20%;
     background-color: #F3F3F3;
     float: left;
-=======
-    /*width: 20%;*/
-    /*float: left;*/
->>>>>>> 35471a6802627acbdee7d0cb972d6deb29248aec
 }
 #form-info {
     width: 80%;

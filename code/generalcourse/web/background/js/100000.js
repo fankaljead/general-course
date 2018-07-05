@@ -154,14 +154,14 @@ function replyMessage(row) {
             method: 'post',
             success: function (data) {
                 if (data == 1) {
-                    alert("回复成功！");
+                    sweetAlert("回复成功！");
                     var opt = {
                         url: '/getMessages',
                         silent: true,
                     };
                     $('#table').bootstrapTable('refresh',opt);
                 } else {
-                    alert("回复失败");
+                    sweetAlert("回复失败");
                 }
             }
         })

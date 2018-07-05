@@ -25,7 +25,7 @@ function columnClick(moduleId) {
         "            </div>");
 
     addColumnTable({})
-    addPaginationColumn();
+    newColumn();
 }
 
 /**
@@ -35,7 +35,7 @@ function columnClick(moduleId) {
 function addColumnTable(columnData) {
     // $('#table').empty();
     $('#table').bootstrapTable({
-        url: '/getColumns?level=1',
+        url: '/getSecondColumns?level=1',
         columns: [{
             field: 'columnId',
             title: '栏目id'
@@ -43,11 +43,11 @@ function addColumnTable(columnData) {
             field: 'columnName',
             title: '栏目名称'
         }, {
-            field: 'level',
-            title: '栏目级别'
-        },{
             field: 'parentId',
-            title: '父栏目'
+            title: '父栏目id'
+        },{
+            field: 'parentName',
+            title: '父栏目名称'
         },
             {
                 title: '操作',
@@ -57,13 +57,17 @@ function addColumnTable(columnData) {
                         "\t修改\n" +
                         "</span>";
                     var c = '<span  class = "toWhite" \
-                        onclick = "readyToDeleteColumn('+row.columnId+')"> 删除</span>';
+                        onclick = "readyToDeleteColumnId('+row.columnId+')"> 删除</span>';
+
                     return b+c;
                 }
             }
         ],
 
         search: true,
+        pagination:true,
+        pageNumber:1,
+        pageSize:5,
         onCheck : function(row) {
             hmdId.push(row.id);
 
@@ -115,32 +119,32 @@ function changeColumn(row) {
     show_for_show_changeColumn.setAttribute('type', 'text');
     show_for_show_changeColumn.setAttribute('class', 'form-control');
     // show_for_show_title.setAttribute('disabled', 'true');
-    show_for_show_changeColumn.setAttribute('id', 'message_show_title_id');
+    show_for_show_changeColumn.setAttribute('id', 'column_show_columnName_id');
     div_for_show_changeColumn.appendChild(label_for_show_changeColumn);
     div_for_show_changeColumn.appendChild(show_for_show_changeColumn);
     form.appendChild(div_for_show_changeColumn);
     show_for_show_changeColumn.value = row.columnName;
 
-    //父栏目ID
+    //父栏目
     var div_for_show_parentId= document.createElement("div");
     div_for_show_parentId.setAttribute('class', 'form-group');
     var label_for_show_parentId= document.createElement("label");
-    label_for_show_parentId.innerText = "父栏目Id";
+    label_for_show_parentId.innerText = "选择所属父栏目";
     var  select_column = document.createElement("select");
-    select_column.setAttribute('id', "add_column_select_id")
+    select_column.setAttribute('id', "add_column_parentName_id")
     select_column.style = "width: 568px;\n" +
         "    height: 38px;    border: 1px solid #ccc;\n" +
         "    border-radius: 4px;";
     $.ajax({
-        url: '/getColumns',
+        url: '/getColumns?level=0',
         method: 'post',
         success: function (data) {
             data = JSON.parse(data);
             for (var i = 0; i < data.length; i++) {
                 var option_column = document.createElement("option");
                 option_column.setAttribute('value', data[i].columnId);
-                option_column.innerText = data[i].parentId;
-                if(data[i].columnId == rowId.columnId) {
+                option_column.innerText = data[i].columnName;
+                if(data[i].parentName == row.parentName) {
                     option_column.setAttribute('selected', 'selected');
                 }
                 select_column.appendChild(option_column);
@@ -160,27 +164,27 @@ function changeColumn(row) {
 
     modal_submit_id.onclick = function (ev1) {
         $.ajax({
-            url: '/replyMessage?reply='+$('#message_show_reply_id').val()
-            +"&replyTime="+CurrentTime()
-            +"&status=1&messageId="+row.messageId,
+            url: '/updateColumn?columnName='+$('#column_show_columnName_id').val()
+            +"&parentId="+$('#add_column_parentName_id option:selected').val()+"&columnId="+row.columnId,
             method: 'post',
             success: function (data) {
                 if (data == 1) {
-                    alert("回复成功！");
+                    sweetAlert("修改成功！");
                     var opt = {
-                        url: '/getMessages',
+                        url: '/getSecondColumns',
                         silent: true,
                     };
                     $('#table').bootstrapTable('refresh',opt);
                 } else {
-                    alert("回复失败");
+                    sweetAlert("修改失败");
                 }
             }
         })
     }
 }
 
-function readyToDeleteMessage(row) {
+
+function readyToDeleteColumnId(row) {
     swal({
         title: "您确定要删除吗？",
         text: "您确定要删除这条数据？",
@@ -190,22 +194,19 @@ function readyToDeleteMessage(row) {
         animation: 'slide-from-top',
         confirmButtonText: "是的，我要删除",
         confirmButtonColor: "#ec6c62"
-    }, function () {
-        var ids = '['+row+']';
+    },function () {
+        var ids = [];
 
-        console.log("delete id", row)
         $.ajax({
-            url: '/deleteMessages?messageIds='+ids,
+            url: '/deleteByColumnId?columnId='+row,
             method: 'post',
             success: function (data) {
                 if (data == 1) {
                     var opt = {
-                        url: '/getMessages',
+                        url: '/getSecondColumns',
                         silent: true,
                     };
                     $('#table').bootstrapTable('refresh',opt);
-                } else {
-
                 }
             }
         })
@@ -214,62 +215,117 @@ function readyToDeleteMessage(row) {
 }
 
 
-/**
- * 分页
- */
-function addPaginationMessage() {
-    var pagination = "<div class=\"row clearfix\">\n" +
-        "\t\t<div class=\"col-md-12 column\">\n" +
-        "\t\t\t<ul class=\"pagination\">\n" +
-        "\t\t\t\t<li>\n" +
-        "\t\t\t\t\t <a href=\"#\" onclick='messagePrePage()'>上一页</a>\n" +
-        "\t\t\t\t</li>\n" +
-        "<li>\n" +
-        "\t\t\t\t\t <a href=\"#\" id='article_page_index'>第1页</a>\n" +
-        "\t\t\t\t</li>\n" +
-        "\t\t\t\t<li>\n" +
-        "\t\t\t\t\t <a href=\"#\" onclick='messageNextPage()'>下一页</a>\n" +
-        "\t\t\t\t</li>\n" +
-        "\t\t\t</ul>\n" +
-        "\t\t</div>\n" +
-        "\t</div>";
-    window.articlePageIndex = 1;
-    window.articlePageSize = 7;
-    var pagination_div = document.createElement("div");
-    pagination_div.setAttribute('class', 'container');
-    pagination_div.innerHTML = pagination;
-    document.getElementById('content-main-table').appendChild(pagination_div);
 
+function newColumn(row) {
+
+    var form_info = document.getElementById('form-info');
+    $('#form-info').empty();
+    var form = document.createElement("form");
+    form.setAttribute('role', 'form');
+
+    // data-toggle=\"modal\" onclick='showDetail("+row.resourceId+")' data-target=\"#myModal\">
+    // 新增按钮
+    var div_for_input_add = document.createElement("div");
+    div_for_input_add.setAttribute('class', 'col-lg-1');
+    var input_for_input_add = document.createElement("input");
+    input_for_input_add.setAttribute('data-toggle', 'modal');
+    input_for_input_add.setAttribute('data-target', '#myModal');
+    input_for_input_add.setAttribute('type', 'button');
+    input_for_input_add.setAttribute('value', '新增');
+    input_for_input_add.setAttribute('class', 'form-control');
+    input_for_input_add.setAttribute('id', 'message_input_add_id');
+    div_for_input_add.style = "backgroud: #2AABD2;"
+    div_for_input_add.appendChild(input_for_input_add);
+    form.appendChild(div_for_input_add);
+    input_for_input_add.addEventListener('click', function (ev) {
+        addColumn(row)
+    })
+
+    form_info.appendChild(form);
 }
 
 /**
- * 上一页
+ * 新增栏目
+ * @param ev
  */
-function messagePrePage() {
-    if (window.articlePageIndex > 0) {
-        window.articlePageIndex--;
-        document.getElementById('article_page_index').innerText = "第" + window.articlePageIndex + "页";
-        var opt = {
-            url: '/getMessages?pageIndex='+window.articlePageIndex+"&pageSize="+window.articlePageSize,
-            silent: true,
-        };
-        $('#table').bootstrapTable('refresh', opt);
+function addColumn(row) {
+
+    var form = document.createElement("form");
+    // $('#myModalLabel').empty();
+    $('#myModalLabelTitle').text("新增栏目");
+
+    var modal_body = document.getElementById('modal-body');
+    $('#modal-body').empty();
+
+    var div_for_show_addColumn = document.createElement("div");
+    div_for_show_addColumn.setAttribute('class', 'form-group');
+    var label_for_show_addColumn = document.createElement("label");
+    label_for_show_addColumn.setAttribute('for', 'resourceId');
+    label_for_show_addColumn.innerText = "栏目名称";
+    var show_for_show_addColumn = document.createElement("input");
+    show_for_show_addColumn.setAttribute('type', 'text');
+    show_for_show_addColumn.setAttribute('class', 'form-control');
+    // show_for_show_title.setAttribute('disabled', 'true');
+    show_for_show_addColumn.setAttribute('id', 'column_show_columnName_id');
+    div_for_show_addColumn.appendChild(label_for_show_addColumn);
+    div_for_show_addColumn.appendChild(show_for_show_addColumn);
+    form.appendChild(div_for_show_addColumn);
+
+    //父栏目ID
+    var div_for_show_newParentId= document.createElement("div");
+    div_for_show_newParentId.setAttribute('class', 'form-group');
+    var label_for_show_newParentId= document.createElement("label");
+    label_for_show_newParentId.innerText = "选择所属父栏目";
+    var  select_column = document.createElement("select");
+    select_column.setAttribute('id', "add_column_new_parentName_id")
+    select_column.style = "width: 568px;\n" +
+        "    height: 38px;    border: 1px solid #ccc;\n" +
+        "    border-radius: 4px;";
+    $.ajax({
+        url: '/getColumns?level=0',
+        method: 'post',
+        success: function (data) {
+            data = JSON.parse(data);
+            for (var j = 0; j < data.length; j++) {
+                var option_column = document.createElement("option");
+                option_column.setAttribute('value', data[j].columnId);
+                option_column.innerText = data[j].columnName;
+                // if(data[j].parentName == row.parentName) {
+                //     option_column.setAttribute('selected', 'selected');
+                // }
+                select_column.appendChild(option_column);
+            }
+        }
+    })
+    div_for_show_newParentId.appendChild(label_for_show_newParentId);
+    div_for_show_newParentId.appendChild(document.createElement("br"));
+    div_for_show_newParentId.appendChild(select_column);
+    form.appendChild(div_for_show_newParentId);
+
+
+    modal_body.appendChild(form);
+
+    // 确认修改
+    var modal_submit_id = document.getElementById('modal_submit_id');
+
+    modal_submit_id.onclick = function (ev1) {
+        var createTime = CurrentTime();
+        $.ajax({
+            url: '/addColumn?columnName='+$('#column_show_columnName_id').val() +"&parentId="+$('#add_column_new_parentName_id option:selected').val(),
+
+            method: 'post',
+            success: function (data) {
+                if (data != 0) {
+                    sweetAlert("新增成功")
+                    var opt = {
+                        url: '/getSecondColumns',
+                        silent: true,
+                    };
+                    $('#table').bootstrapTable('refresh',opt);
+                } else {
+                    sweetAlert("新增失败");
+                }
+            }
+        })
     }
 }
-
-
-/**
- * 下一页
- */
-function messageNextPage() {
-    if (window.articlePageIndex > 0) {
-        window.articlePageIndex++;
-        document.getElementById('article_page_index').innerText = "第" + window.articlePageIndex + "页";
-        var opt = {
-            url: '/getMessages?pageIndex='+window.articlePageIndex+"&pageSize="+window.articlePageSize,
-            silent: true,
-        };
-        $('#table').bootstrapTable('refresh', opt);
-    }
-}
-

@@ -12,8 +12,16 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-@WebServlet(name = "ServletUpdateColunm", urlPatterns = {"/updateColumn"})
-public class ServletUpdateColunm extends HttpServlet {
+/**
+ * 新增栏目
+ * 前台参数
+ *
+ * columnName: 栏目名称
+ * parentId: 父栏目id
+ */
+@WebServlet(name = "ServletAddColumn", urlPatterns = {"/addColumn"})
+public class ServletAddColumn extends HttpServlet {
+
     private IColunmService service = new ColunmService();
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -22,10 +30,6 @@ public class ServletUpdateColunm extends HttpServlet {
         response.setContentType("text/html;charset=utf-8");
 
         String columnName = request.getParameter("columnName");
-
-        String columnIdString = request.getParameter("columnId");
-        Integer columnId = 0;
-
         String parentIdString = request.getParameter("parentId");
         Integer parentId = 0;
 
@@ -34,19 +38,14 @@ public class ServletUpdateColunm extends HttpServlet {
             parentId = Integer.parseInt(parentIdString);
         }
 
-        // 判断前台传的值是否为空
-        if (!(columnIdString == null || columnIdString.equals("") || columnIdString.equals("undefined"))) {
-            columnId = Integer.parseInt(columnIdString);
-        }
-
         Colunm colunm = new Colunm();
-        colunm.setId(columnId);
         colunm.setName(columnName);
         colunm.setParentId(parentId);
+        colunm.setLevel(1);
 
         PrintWriter out = response.getWriter();
 
-        out.println(service.updateColunm(colunm));
+        out.println(service.addColumn(colunm));
 
         out.close();
     }

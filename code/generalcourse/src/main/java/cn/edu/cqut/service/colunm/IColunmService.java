@@ -34,4 +34,18 @@ public interface IColunmService {
      * @return
      */
     public JSONArray getSecondColumns();
+
+    /**
+     * 删除栏目
+     * @param columnId
+     * @return
+     */
+    public Integer deleteByColumnId(Integer columnId);
+
+    /**
+     * 新增栏目
+     * @param colunm
+     * @return
+     */
+    public Integer addColumn(Colunm colunm);
 }

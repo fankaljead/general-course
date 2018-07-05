@@ -307,6 +307,7 @@ function addEmployee(ev, column) {
     select_sex.appendChild(unKnown);
     select_sex.appendChild(male);
     select_sex.appendChild(female)
+
     div_for_show_sex.appendChild(document.createElement("br"));
     div_for_show_sex.appendChild(select_sex);
     form.appendChild(div_for_show_sex)
