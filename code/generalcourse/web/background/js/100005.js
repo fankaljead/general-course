@@ -34,8 +34,8 @@ function addEmployTable(columnData) {
             field: 'sex',
             title: '性别'
         },{
-            field: 'roleId',
-            title: '角色编号'
+            field: 'roleName',
+            title: '角色名称'
         },
             {
                 title: '操作',
