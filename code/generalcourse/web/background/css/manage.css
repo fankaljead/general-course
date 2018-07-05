@@ -60,7 +60,10 @@ body{
     width: 85%;
     height: 100%;
     float: right;
+<<<<<<< HEAD
     background-color: #F3F3F3;
+=======
+>>>>>>> abbbafbba2982aba2eaa1bea03eae9e97cc4a340
 }
 
 .nav-nav p{
@@ -87,7 +90,13 @@ body{
 }
 
 #left-column {
+<<<<<<< HEAD
 
+=======
+    width: 20%;
+    background-color: #F3F3F3;
+    float: left;
+>>>>>>> abbbafbba2982aba2eaa1bea03eae9e97cc4a340
 }
 #form-info {
     width: 80%;

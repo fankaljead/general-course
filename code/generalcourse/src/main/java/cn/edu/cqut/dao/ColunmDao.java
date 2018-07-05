@@ -73,11 +73,8 @@ public class ColunmDao {
         sql.append("SELECT\n" +
                 "\t*\n" +
                 "FROM\n" +
-                "\t\n" +
-                "\tcolunm as parent,\n" +
-                "colunm\n" +
-                "WHERE\n" +
-                "\tcolunm.id = parent.parentId");
+                "\t colunm \n" +
+                "JOIN colunm AS parent ON (parent.id = colunm.parentId)");
 
         return sql.toString();
     }
