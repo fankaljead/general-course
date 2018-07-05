@@ -1,4 +1,4 @@
-# 接口文档 #
+﻿# 接口文档 #
 
 ## 前台页面 ##
 
@@ -299,6 +299,23 @@
 
     **后台返回int**
     - result: 成功1，失败0
+
+1. deleteByColumnId 删除栏目 已完成
+
+   **前台参数**
+   - columnId: 栏目id
+
+    **后台返回int**
+    - result: 成功1，失败0
+
+1， addColumn 已完成
+	
+   **前台参数**
+   - columnName: 栏目名称
+   - parentId: 父栏目id
+
+   **后台返回int**
+   - result: 成功1，失败0
 
 
 ### 系统设置 ###

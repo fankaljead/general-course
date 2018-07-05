@@ -79,4 +79,22 @@ public class ColunmService implements IColunmService{
 
         return array;
     }
+
+    /**
+     * 删除栏目
+     * @param columnId
+     * @return
+     */
+    public Integer deleteByColumnId(Integer columnId) {
+        return BaseDao.deleteById(columnId, Colunm.class);
+    }
+
+    /**
+     * 新增栏目
+     * @param colunm
+     * @return
+     */
+    public Integer addColumn(Colunm colunm) {
+        return BaseDao.save(colunm);
+    }
 }
