@@ -5,7 +5,7 @@ function refreshTime() {
     $(".time").append(time);
 }
 $(function () {
-    setInterval("refreshTime()",100);
+    setInterval("refreshTime()",1000);
 })
 
 //点击侧边栏菜单显示子菜单
@@ -25,16 +25,16 @@ $(function showMenu() {
 
 // 页面dom完成加载后执行
 $(document).ready(function () {
-   $.ajax({
-       url: "/getRoleByAccount",
-       method: "post",
-       async: false, // 同步
-       success: function (data) {
-           data = JSON.parse(data);
-           console.log("data:", data);
-           document.getElementsByClassName("role")[0].innerHTML = "欢迎您，" + data.roleName;
-       }
-   })
+        $.ajax({
+            url: "/getRoleByAccount",
+            method: "post",
+            async: false, // 同步
+            success: function (data) {
+                data = JSON.parse(data);
+                console.log("data:", data);
+                document.getElementsByClassName("role")[0].innerHTML = "欢迎您，" + data.roleName;
+            }
+        })
 
     $.ajax({
         url: "/getModule",
@@ -44,20 +44,26 @@ $(document).ready(function () {
             data = JSON.parse(data);
             console.table("module:", data)
 
-            for (var i = 0; i < data.length; i++) {
-                var div = document.createElement("div");
-                var p = document.createElement("p");
-                var ul = document.createElement("ul");
-                ul.setAttribute('class', 'nav1');
+                          for (var i = 0; i < data.length; i++) {
+                    var div = document.createElement("div");
+                    var p = document.createElement("p");
+                    var ul = document.createElement("ul");
+                    ul.setAttribute('class', 'nav1');
 
-                p.innerText = data[i].moduleName;
+                    p.innerText = data[i].moduleName;
+
 
 
                 for (var j = 0; j < data[i].subModules.length; j++) {
                     var li = document.createElement("li");
+                    li.setAttribute('id', "subModuleLi"+data[i].subModules[j].subModuleId)
                     li.innerText = data[i].subModules[j].subModuleName;
+                    var subModule = data[i].subModules[j];
+                    // 给每个模块添加点击事件，传染模块的id和事件ev
 
+                    li.setAttribute('onclick', 'moduleClick('+JSON.stringify(subModule) +')')
                     ul.appendChild(li);
+
                 }
 
                 var module_div = document.getElementById('module_div');
