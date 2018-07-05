@@ -60,8 +60,22 @@ body{
     width: 85%;
     height: 100%;
     float: right;
+<<<<<<< HEAD
 
     background-color: #F3F3F3;
+=======
+<<<<<<< HEAD
+<<<<<<< HEAD
+    background-color: #F3F3F3;
+=======
+>>>>>>> abbbafbba2982aba2eaa1bea03eae9e97cc4a340
+=======
+
+    background-color: #F3F3F3;
+=======
+>>>>>>> b11381169bc275fb74ce19a5c60670fe1b635cde
+>>>>>>> 8600b535d1660714096ff7b77a3a0c475331295d
+>>>>>>> 8ee158f3b75702d0badad89bcb183ec70c0d0a37
 }
 
 .nav-nav p{
@@ -88,10 +102,25 @@ body{
 }
 
 #left-column {
+<<<<<<< HEAD
+
+=======
     width: 20%;
     background-color: #F3F3F3;
     float: left;
+<<<<<<< HEAD
 
+=======
+<<<<<<< HEAD
+>>>>>>> abbbafbba2982aba2eaa1bea03eae9e97cc4a340
+=======
+<<<<<<< HEAD
+    /*width: 20%;*/
+    /*float: left;*/
+=======
+>>>>>>> b11381169bc275fb74ce19a5c60670fe1b635cde
+>>>>>>> 8600b535d1660714096ff7b77a3a0c475331295d
+>>>>>>> 8ee158f3b75702d0badad89bcb183ec70c0d0a37
 }
 #form-info {
     width: 80%;

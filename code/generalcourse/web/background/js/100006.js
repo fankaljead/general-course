@@ -172,14 +172,14 @@ function readyToEditEmployee(row) {
             method: 'post',
             success: function (data) {
                 if (data == 1) {
-                    alert("修改成功！");
+                    sweetAlert("修改成功！");
                     var opt = {
                         url: '/getEmployees',
                         silent: true,
                     };
                     $('#table').bootstrapTable('refresh',opt);
                 } else {
-                    alert("修改失败");
+                    sweetAlert("修改失败");
                 }
             }
         })
@@ -327,14 +327,14 @@ function addEmployee(ev, column) {
             method: 'post',
             success: function (data) {
                 if (data != 0) {
-                    alert("新增成功")
+                    sweetAlert("新增成功")
                     var opt = {
                         url: '/getEmployees',
                         silent: true,
                     };
                     $('#table').bootstrapTable('refresh',opt);
                 } else {
-                    alert("新增失败");
+                    sweetAlert("新增失败");
                 }
             }
         })
