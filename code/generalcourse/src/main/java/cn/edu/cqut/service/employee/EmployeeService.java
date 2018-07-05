@@ -131,7 +131,7 @@ public class EmployeeService implements IEmployeeService{
                 JSONObject object = new JSONObject();
                 object.put("roleId", set.getInt("role.id"));
                 object.put("roleName", set.getString("role.name"));
-                object.put("accout", set.getInt("employee.account"));
+                object.put("account", set.getInt("employee.account"));
                 object.put("employeeName", set.getString("employee.name"));
                 object.put("sex", set.getInt("sex"));
 

@@ -47,8 +47,9 @@ function addEmployManageTable(columnData) {
             field: 'sex',
             title: '性别'
         },{
-            field: 'roleId',
-            title: '角色编号'
+            field: 'roleName',
+            title: '角色名称',
+            undefinedText: "未分配角色"
         },
             {
                 title: '操作',
