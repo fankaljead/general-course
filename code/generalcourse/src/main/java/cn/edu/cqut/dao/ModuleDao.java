@@ -27,14 +27,14 @@ public class ModuleDao {
 
         try {
             // 查询 account 的角色 id
-            ResultSet roleSet = DBUtil.query("select id from employee " +
+            ResultSet roleSet = DBUtil.query("select * from employee " +
                     "where account=" + account);
 
 
             Integer roleId = 0;
 
             if (roleSet.next()) {
-                roleId = roleSet.getInt("id");
+                roleId = roleSet.getInt("roleId");
             }
 
             // 查询所有的父模块
@@ -59,8 +59,8 @@ public class ModuleDao {
 
                 while (subSet.next()) {
                     JSONObject subModule = new JSONObject();
-                    subModule.put("subModuleId", subSet.getInt("id"));
-                    subModule.put("subModuleName", subSet.getString("name"));
+                    subModule.put("subModuleId", subSet.getInt("submodule.id"));
+                    subModule.put("subModuleName", subSet.getString("submodule.name"));
                     subModule.put("status", subSet.getInt("status"));
                     subModule.put("parentId", subSet.getInt("parentModuleId"));
 
